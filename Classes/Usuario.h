@@ -12,11 +12,3 @@ public:
     Usuario(/* args */);
     ~Usuario();
 };
-
-Usuario::Usuario(/* args */)
-{
-}
-
-Usuario::~Usuario()
-{
-}
