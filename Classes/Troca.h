@@ -15,11 +15,3 @@ public:
 
     ~Troca();
 };
-
-Troca::Troca(/* args */)
-{
-}
-
-Troca::~Troca()
-{
-}
