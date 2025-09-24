@@ -13,9 +13,11 @@ private:
     // status da figurinha pode ser:  0 (na coleção), 1 (colada no álbum), 2 (disponível para troca)
 
 public:
+    // construtor e destrutor
     Figurinha(int num, string nome, string cont, int status, int numPag);
     ~Figurinha();
 
+    // getters
     string getNome()
     {
         return nome;
@@ -36,5 +38,6 @@ public:
         return numPag;
     }
 
+    // vetor de figurinhas
     static vector<Figurinha> CarregarDeCsv(const string &arquivo);
 };
