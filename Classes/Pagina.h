@@ -2,12 +2,10 @@
 #include <string>
 #include "Figurinha.h"
 
-#define MAX_FIGURINHAS 30
-
 class Pagina
 {
 private:
-    Figurinha figurinhas[MAX_FIGURINHAS];
+    vector<Figurinha> figurinhas;
     string titulo;
     int numMin, numMax;
 

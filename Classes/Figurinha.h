@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -12,6 +13,28 @@ private:
     // status da figurinha pode ser:  0 (na coleção), 1 (colada no álbum), 2 (disponível para troca)
 
 public:
-    Figurinha(/* args */);
+    Figurinha(int num, string nome, string cont, int status, int numPag);
     ~Figurinha();
+
+    string getNome()
+    {
+        return nome;
+    }
+
+    string getConteudo()
+    {
+        return conteudo;
+    }
+
+    int getStatus()
+    {
+        return status;
+    }
+
+    int getNumPag()
+    {
+        return numPag;
+    }
+
+    static vector<Figurinha> CarregarDeCsv(const string &arquivo);
 };
