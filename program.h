@@ -15,4 +15,6 @@ public:
 
     void inicializate();
     void run();
+
+    void adicionarUsuario(Usuario usuario);
 };

@@ -10,11 +10,13 @@ private:
     Album album;
 
 public:
+    Usuario();
     Usuario(string nome, string senha);
     ~Usuario();
 
-    string getNome();
-    string getSenha();
+    string getNome() const;
+    string getSenha() const;
 
     static vector<Usuario> CarregarDeCsv(const string &arquivo);
+    void salvarEmCsv(const string &arquivo);
 };

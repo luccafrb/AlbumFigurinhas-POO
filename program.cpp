@@ -1,6 +1,7 @@
 #include <iostream>
 #include "program.h"
 #include "Interface/Menus.h"
+#include "Classes/Usuario.h"
 
 using namespace std;
 
@@ -10,6 +11,24 @@ program::program()
 
 program::~program()
 {
+}
+
+Usuario criarUsuario()
+{
+    string nome, senha;
+    cout << "Digite o nome do novo usuário: ";
+    cin >> nome;
+
+    cout << "Digite a senha do novo usuário: ";
+    cin >> senha;
+
+    Usuario novoUsuario(nome, senha);
+    return novoUsuario;
+}
+
+void program::adicionarUsuario(Usuario usuario)
+{
+    usuarios.push_back(usuario);
 }
 
 void program::inicializate()
@@ -22,7 +41,7 @@ void program::inicializate()
 
 void program::run()
 {
-    int escolha;
+    char escolha;
 
     Menus menus;
 
@@ -33,8 +52,36 @@ void program::run()
         switch (escolha)
         {
         case 1:
-            cout << "Aqui, a gente cria um novo usuário" << endl;
+        {
+            bool nomeUnico = true;
+            Usuario novoUsuario;
+
+            do
+            {
+                novoUsuario = criarUsuario();
+                nomeUnico = true;
+
+                for (Usuario &u : usuarios)
+                {
+                    if (u.getNome() == novoUsuario.getNome())
+                    {
+                        cout << "O nome de usuário \"" << u.getNome() << "\" já existe. Escolha outro, por favor." << endl;
+                        nomeUnico = false;
+                        break;
+                    };
+
+                    if (nomeUnico == false)
+                    {
+                        cout << "O nome de usuário " << u.getNome() << " já existe! Tente outro." << endl;
+                    }
+                }
+
+            } while (nomeUnico == false);
+
+            novoUsuario.salvarEmCsv("Dados\\usuarios.csv");
+            adicionarUsuario(novoUsuario);
             break;
+        }
 
         case 2:
             cout << "Solicita usuario e senha, e próximo menu" << endl;
@@ -47,7 +94,7 @@ void program::run()
         case 4:
             cout << "Lista de usuários:" << endl;
 
-            for (Usuario u : usuarios)
+            for (const Usuario &u : usuarios)
             {
                 cout << u.getNome() << endl;
             }
