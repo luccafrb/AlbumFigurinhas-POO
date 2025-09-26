@@ -69,11 +69,6 @@ void program::run()
                         nomeUnico = false;
                         break;
                     };
-
-                    if (nomeUnico == false)
-                    {
-                        cout << "O nome de usuário " << u.getNome() << " já existe! Tente outro." << endl;
-                    }
                 }
 
             } while (nomeUnico == false);
