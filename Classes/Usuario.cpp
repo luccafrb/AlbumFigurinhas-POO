@@ -48,15 +48,12 @@ vector<Usuario> Usuario::CarregarDeCsv(const string &arquivo)
 
 void Usuario::salvarEmCsv(const string &arquivo)
 {
-    ofstream fsOf;
-    fsOf.open(arquivo, ios::app);
+    ofstream fsOf(arquivo, ios::app);
 
-    if (fsOf.tellp() != 0)
-    {
-        cout << '\n';
-    }
-
+    fsOf << '\n'
+         << nome << ',' << senha;
     fsOf.close();
+
     cout << "---------------------" << endl;
     cout << "Usuário salvo no CSV!" << endl;
 }
