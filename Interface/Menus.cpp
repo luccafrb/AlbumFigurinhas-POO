@@ -18,6 +18,7 @@ int Menus::mostrarMenuInicial()
     cout << "1 - Novo Álbum" << endl;
     cout << "2 - Acessar Álbum" << endl;
     cout << "3 - Sair" << endl;
+    cout << "4 - Mostrar dados dos CSV's (Para teste)" << endl;
     cout << "----------------------------------" << endl;
 
     int escolha;
