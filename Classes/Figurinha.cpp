@@ -15,6 +15,26 @@ Figurinha::~Figurinha()
 {
 }
 
+bool Figurinha::colar()
+{
+    if (status == 0)
+    {
+        status = 1;
+        cout << "Figurinha colada com sucesso!" << endl;
+        return true;
+    }
+    else if (status == 1)
+    {
+        cout << "Figurinha já estava colada!" << endl;
+        return true;
+    }
+    else
+    {
+        cout << "Falha em colar a figurinha!" << endl;
+        return false;
+    }
+}
+
 vector<Figurinha> Figurinha::CarregarDeCsv(const string &arquivo)
 {
     vector<Figurinha> figurinhas;

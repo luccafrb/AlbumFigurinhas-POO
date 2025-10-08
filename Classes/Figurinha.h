@@ -38,6 +38,8 @@ public:
         return numPag;
     }
 
+    bool colar();
+
     // vetor de figurinhas
     static vector<Figurinha> CarregarDeCsv(const string &arquivo);
 };

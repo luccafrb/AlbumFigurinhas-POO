@@ -9,9 +9,12 @@ class Album
 private:
     vector<Figurinha> figurinhas;
     Troca requisicoesTroca;
-    Pagina paginas;
+    vector<Pagina> paginas;
 
 public:
     Album();
     ~Album();
+
+    bool colarFigurinha();
+    void mostrarFigurinhasDaColecao();
 };
