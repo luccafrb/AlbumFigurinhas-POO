@@ -2,6 +2,7 @@
 
 #include "Classes/Figurinha.h"
 #include "Classes/Usuario.h"
+#include "Interface/Menus.h"
 
 class program
 {
@@ -16,5 +17,8 @@ public:
     void inicializate();
     void run();
 
-    void adicionarUsuario(Usuario usuario);
+    void adicionarUsuario();
+    void menuGerenciarAlbum(Usuario *usuarioAtual, Menus &menu);
+    void menuInicial();
+    Usuario *login();
 };

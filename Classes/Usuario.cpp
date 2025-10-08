@@ -2,6 +2,8 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <algorithm>
+#include <ctime>
 
 Usuario::Usuario()
     : nome(""), senha("") {}
@@ -44,6 +46,55 @@ vector<Usuario> Usuario::CarregarDeCsv(const string &arquivo)
     }
 
     return usuarios;
+}
+
+void Usuario::abrirPacotinho(vector<Figurinha> &todasFigurinhas)
+{
+    vector<Figurinha> pacotinho;
+    int quantidade = 3;
+
+    if (todasFigurinhas.empty())
+        return;
+
+    srand(time(nullptr));
+
+    // Copia os índices de todas as figurinhas
+    vector<int> indices;
+    for (size_t i = 0; i < todasFigurinhas.size(); ++i)
+        indices.push_back(i);
+
+    // Garante que não vai tentar pegar mais do que existe
+    quantidade = min(quantidade, (int)todasFigurinhas.size());
+
+    // Seleciona 'quantidade' figurinhas aleatoriamente sem repetição
+    for (int i = 0; i < quantidade; ++i)
+    {
+        int randPos = rand() % indices.size();
+        int idx = indices[randPos];
+
+        pacotinho.push_back(todasFigurinhas[idx]);
+
+        // Remove o índice usado
+        indices[randPos] = indices.back();
+        indices.pop_back();
+    }
+
+    for (Figurinha &f : pacotinho)
+    {
+        album.adicionarFigurinha(f);
+    }
+
+    cout << "-- Novas figurinhas --" << endl;
+
+    for (int i = 0; i < pacotinho.size(); i++)
+    {
+        cout << pacotinho[i].getNome() << endl;
+    }
+
+    cout << "---------------------" << endl;
+    cout << "Pressione ENTER para continuar..." << endl;
+    getchar();
+    getchar();
 }
 
 void Usuario::salvarEmCsv(const string &arquivo)

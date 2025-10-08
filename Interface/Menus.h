@@ -7,6 +7,6 @@ public:
     ~Menus();
 
     int mostrarMenuInicial();
-    void mostrarMenu();
-    void mostrarMenuGerenciarAlbum();
+    int mostrarMenuAlbum();
+    int mostrarMenuGerenciarColecao();
 };

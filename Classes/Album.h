@@ -17,4 +17,5 @@ public:
 
     bool colarFigurinha();
     void mostrarFigurinhasDaColecao();
+    void adicionarFigurinha(Figurinha &figurinha);
 };

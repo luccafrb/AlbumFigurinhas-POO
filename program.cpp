@@ -13,22 +13,36 @@ program::~program()
 {
 }
 
-Usuario criarUsuario()
+void program::adicionarUsuario()
 {
+    bool nomeUnico = false;
+
     string nome, senha;
-    cout << "Digite o nome do novo usuário: ";
-    cin >> nome;
+    while (!nomeUnico)
+    {
+        cout << "Digite o nome do novo usuário: ";
+        cin >> nome;
+
+        nomeUnico = true;
+
+        for (Usuario &u : usuarios)
+        {
+            if (u.getNome() == nome)
+            {
+                cout << "O nome de usuário \"" << u.getNome() << "\" já existe. Escolha outro, por favor." << endl;
+                nomeUnico = false;
+                break;
+            };
+        }
+    }
 
     cout << "Digite a senha do novo usuário: ";
     cin >> senha;
 
     Usuario novoUsuario(nome, senha);
-    return novoUsuario;
-}
 
-void program::adicionarUsuario(Usuario usuario)
-{
-    usuarios.push_back(usuario);
+    novoUsuario.salvarEmCsv("Dados\\usuarios.csv");
+    usuarios.push_back(novoUsuario);
 }
 
 void program::inicializate()
@@ -41,52 +55,69 @@ void program::inicializate()
 
 void program::run()
 {
-    char escolha;
+    menuInicial();
+}
 
-    Menus menus;
+void program::menuGerenciarAlbum(Usuario *usuarioAtual, Menus &menus)
+{
+
+    int escolha = 0;
+
+    while (true)
+    {
+        escolha = menus.mostrarMenuAlbum();
+
+        switch (escolha)
+        {
+        case 1:
+            cout << "1 - Ver Álbum" << endl;
+            break;
+        case 2:
+            cout << "2 - Gerenciar a Coleção" << endl;
+            break;
+        case 3:
+            usuarioAtual->abrirPacotinho(figurinhas);
+            break;
+        case 4:
+            cout << "4 - Voltar ao Menu Anterior" << endl;
+            break;
+        default:
+            cout << "Opção inválida!" << endl;
+        }
+    };
+}
+
+void program::menuInicial()
+{
+    int escolha;
 
     do
     {
+        Menus menus;
         escolha = menus.mostrarMenuInicial();
 
         switch (escolha)
         {
         case 1:
         {
-            bool nomeUnico = true;
-            Usuario novoUsuario;
-
-            do
-            {
-                novoUsuario = criarUsuario();
-                nomeUnico = true;
-
-                for (Usuario &u : usuarios)
-                {
-                    if (u.getNome() == novoUsuario.getNome())
-                    {
-                        cout << "O nome de usuário \"" << u.getNome() << "\" já existe. Escolha outro, por favor." << endl;
-                        nomeUnico = false;
-                        break;
-                    };
-                }
-
-            } while (nomeUnico == false);
-
-            novoUsuario.salvarEmCsv("Dados\\usuarios.csv");
-            adicionarUsuario(novoUsuario);
+            adicionarUsuario();
             break;
         }
 
         case 2:
-            cout << "Solicita usuario e senha, e próximo menu" << endl;
+        {
+            Usuario *usuarioAtual = login();
+
+            menuGerenciarAlbum(usuarioAtual, menus);
             break;
+        }
 
         case 3:
             cout << "Saindo.." << endl;
             break;
 
         case 4:
+        {
             cout << "Lista de usuários:" << endl;
 
             for (const Usuario &u : usuarios)
@@ -102,9 +133,50 @@ void program::run()
                 cout << f.getNome() << endl;
             }
             break;
+        }
 
         default:
             break;
         }
     } while (escolha != 3);
+}
+
+Usuario *program::login()
+{
+    string senha, nome;
+    cout << "-- Lista de Usuários --" << endl;
+    for (Usuario &u : usuarios)
+    {
+        cout << "- " << u.getNome() << endl;
+    }
+
+    bool loginValido = false;
+    while (true)
+    {
+        cout << "Digite o nome do seu usuário: ";
+        cin >> nome;
+
+        for (Usuario &u : usuarios)
+        {
+            if (u.getNome() == nome)
+            {
+                bool senhaCorreta = false;
+
+                while (!senhaCorreta)
+                {
+                    cout << "Digite a senha do seu usuário: ";
+                    cin >> senha;
+
+                    if (u.getSenha() == senha)
+                    {
+                        senhaCorreta = true;
+                        return &u;
+                    }
+
+                    cout << "Senha de usuário incorreta! Tente novamente." << endl;
+                }
+            }
+        }
+        cout << "Nome de usuário não encontrado. Tente novamente." << endl;
+    }
 }

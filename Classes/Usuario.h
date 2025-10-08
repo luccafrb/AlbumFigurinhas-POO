@@ -19,4 +19,5 @@ public:
 
     static vector<Usuario> CarregarDeCsv(const string &arquivo);
     void salvarEmCsv(const string &arquivo);
+    void abrirPacotinho(vector<Figurinha> &figurinhas);
 };

@@ -27,7 +27,7 @@ int Menus::mostrarMenuInicial()
     return escolha;
 }
 
-void Menus::mostrarMenu()
+int Menus::mostrarMenuAlbum()
 {
     cout << "---------- Menu do Álbum ----------" << endl;
     cout << "Escolha uma das opções:" << endl;
@@ -36,11 +36,16 @@ void Menus::mostrarMenu()
     cout << "3 - Abrir Pacote de Figurinhas" << endl;
     cout << "4 - Voltar ao Menu Anterior" << endl;
     cout << "-----------------------------------" << endl;
+
+    int escolha;
+    cin >> escolha;
+
+    return escolha;
 }
 
-void Menus::mostrarMenuGerenciarAlbum()
+int Menus::mostrarMenuGerenciarColecao()
 {
-    cout << "------ Menu Gerenciar Álbum ------" << endl;
+    cout << "------ Menu Gerenciar Colecao ------" << endl;
     cout << "Escolha uma das opções:" << endl;
     cout << "1 - Colar Figurinha" << endl;
     cout << "2 - Disponibilizar para Troca" << endl;
@@ -48,4 +53,9 @@ void Menus::mostrarMenuGerenciarAlbum()
     cout << "4 - Revisar Solicitações de Troca" << endl;
     cout << "5 - Voltar ao Menu Anterior" << endl;
     cout << "----------------------------------" << endl;
+
+    int escolha;
+    cin >> escolha;
+
+    return escolha;
 }

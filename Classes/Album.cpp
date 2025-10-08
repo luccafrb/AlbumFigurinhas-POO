@@ -20,8 +20,11 @@ bool Album::colarFigurinha()
     {
         mostrarFigurinhasDaColecao();
 
-        cout << "Digite o número da figurinha que você deseja colar: ";
+        cout << "Digite o número da figurinha que você deseja colar (0 para sair): ";
         cin >> escolha;
+
+        if (escolha == 0)
+            break;
 
         if (escolha < 1 || escolha > figurinhas.size())
         {
@@ -35,6 +38,11 @@ bool Album::colarFigurinha()
     return true;
 }
 
+void Album::adicionarFigurinha(Figurinha &figurinha)
+{
+    figurinhas.push_back(figurinha);
+}
+
 void Album::mostrarFigurinhasDaColecao()
 {
     if (figurinhas.size() == 0)
@@ -43,13 +51,23 @@ void Album::mostrarFigurinhasDaColecao()
         return;
     }
 
-    cout << "-- Lista de figurinhas da coleção --" << endl;
+    cout << "-- Figurinhas na coleção --" << endl;
 
     for (int i = 0; i < figurinhas.size(); i++)
     {
         if (figurinhas[i].getStatus() == 0)
         {
-            cout << i + 1 << ' - ' << figurinhas[i].getNome();
+            cout << i + 1 << " - " << figurinhas[i].getNome() << endl;
+        }
+    }
+
+    cout << "-- Figurinhas coladas no álbum --" << endl;
+
+    for (int i = 0; i < figurinhas.size(); i++)
+    {
+        if (figurinhas[i].getStatus() == 1)
+        {
+            cout << i + 1 << " - " << figurinhas[i].getNome();
         }
     }
 }
