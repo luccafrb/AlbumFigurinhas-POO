@@ -1,0 +1,68 @@
+# ========================
+# Compilação e binários
+# ========================
+*.exe
+*.out
+*.obj
+*.o
+*.a
+*.so
+*.dll
+*.lib
+*.exp
+*.pdb
+
+# ========================
+# Diretórios de build
+# ========================
+/build/
+/bin/
+/debug/
+/release/
+/dist/
+/out/
+/cmake-build-*/
+
+# ========================
+# Arquivos de backup e temporários
+# ========================
+*~
+*.bak
+*.tmp
+*.swp
+*.swo
+
+# ========================
+# Arquivos de IDEs
+# ========================
+# VSCode
+.vscode/
+*.code-workspace
+
+# CLion / JetBrains
+.idea/
+*.iml
+
+# Visual Studio
+.vs/
+*.sln
+*.vcxproj*
+*.user
+
+# Code::Blocks
+*.cbp
+*.depend
+*.layout
+
+# ========================
+# Sistema operacional
+# ========================
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Linux
+*~
