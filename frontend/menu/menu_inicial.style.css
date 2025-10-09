@@ -1,0 +1,78 @@
+body {
+   font-family: Arial, sans-serif;
+    background-image: url('pokeball.jpeg'); /* Caminho da imagem */
+    background-size: cover;                 /* Faz a imagem preencher a tela */
+    background-repeat: no-repeat;           /* Evita repetição */
+    background-position: center;            /* Centraliza */
+    min-height: 100vh;                      /* Altura mínima da tela inteira */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 50px;
+}
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5); 
+    z-index: -1;
+}
+
+.menu {
+    background-color: #000807;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    padding: 30px 40px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin: 20px;
+    width: 20vw;
+    height: 100%;
+    align-items: center;
+    margin-top: 10%;
+}
+
+.menu h2 {
+    color: #FBF9FF;
+    margin-bottom: 65px;
+    text-align: center;
+    font-size: 29px;
+    font-family: 'Pokemon';
+    letter-spacing: 5px;
+}
+
+.menu p {
+    color: #FBF9FF;
+    margin-bottom: 20px;
+}
+
+.menu button {
+    display: block;
+    width: 100%;
+    height: 100%h;
+    padding: 12px;
+    margin: 30px 0;
+    border: none;
+    background-color: #A2A3BB;
+    color: #FBF9FF;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.menu button:hover {
+    background-color: #9395D3;
+}
+
+.hidden {
+    display: none;
+}
+
+@font-face {
+  font-family: 'Pokemon';
+  src: url('Pokemon\ Solid.ttf') format('truetype');
+  /* Ajuste o caminho conforme a localização do seu arquivo */
+}
