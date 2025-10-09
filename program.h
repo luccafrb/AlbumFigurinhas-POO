@@ -18,8 +18,8 @@ public:
     void run();
 
     void adicionarUsuario();
-    void menuGerenciarAlbum(Usuario *usuarioAtual, Menus &menu);
-    void menuGerenciarColecao(Usuario *usuarioAtual, Menus &menus);
+    void menuGerenciarAlbum(Usuario &usuarioAtual, Menus &menu);
+    void menuGerenciarColecao(Usuario &usuarioAtual, Menus &menus);
     void menuInicial();
-    Usuario *login();
+    Usuario &login();
 };

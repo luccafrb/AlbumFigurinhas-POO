@@ -58,7 +58,7 @@ void program::run()
     menuInicial();
 }
 
-void program::menuGerenciarAlbum(Usuario *usuarioAtual, Menus &menus)
+void program::menuGerenciarAlbum(Usuario &usuarioAtual, Menus &menus)
 {
 
     int escolha = 0;
@@ -70,13 +70,13 @@ void program::menuGerenciarAlbum(Usuario *usuarioAtual, Menus &menus)
         switch (escolha)
         {
         case 1:
-            usuarioAtual->verAlbum();
+            usuarioAtual.verAlbum();
             break;
         case 2:
             menuGerenciarColecao(usuarioAtual, menus);
             break;
         case 3:
-            usuarioAtual->abrirPacotinho(todasFigurinhas);
+            usuarioAtual.abrirPacotinho(todasFigurinhas);
             break;
         case 4:
             menuInicial();
@@ -87,7 +87,7 @@ void program::menuGerenciarAlbum(Usuario *usuarioAtual, Menus &menus)
     };
 }
 
-void program::menuGerenciarColecao(Usuario *usuarioAtual, Menus &menus)
+void program::menuGerenciarColecao(Usuario &usuarioAtual, Menus &menus)
 {
     int escolha = 0;
 
@@ -98,7 +98,7 @@ void program::menuGerenciarColecao(Usuario *usuarioAtual, Menus &menus)
         switch (escolha)
         {
         case 1:
-            usuarioAtual->colarFigurinha();
+            usuarioAtual.colarFigurinha();
             break;
         case 2:
             cout << "2 - Disponibilizar para Troca" << endl;
@@ -136,7 +136,7 @@ void program::menuInicial()
 
         case 2:
         {
-            Usuario *usuarioAtual = login();
+            Usuario usuarioAtual = login();
 
             menuGerenciarAlbum(usuarioAtual, menus);
             break;
@@ -171,7 +171,7 @@ void program::menuInicial()
     } while (escolha != 3);
 }
 
-Usuario *program::login()
+Usuario &program::login()
 {
     string senha, nome;
     cout << "-- Lista de Usuários --" << endl;
@@ -200,7 +200,7 @@ Usuario *program::login()
                     if (u.getSenha() == senha)
                     {
                         senhaCorreta = true;
-                        return &u;
+                        return u;
                     }
 
                     cout << "Senha de usuário incorreta! Tente novamente." << endl;

@@ -154,7 +154,6 @@ void Album::criarPaginas(vector<Figurinha> &todasFigurinhas)
         }
     }
 
-    // Agora define os intervalos numMin e numMax
     int contador = 1;
     for (int i = 0; i < conteudosUnicos.size(); i++)
     {
@@ -163,7 +162,7 @@ void Album::criarPaginas(vector<Figurinha> &todasFigurinhas)
 
         int numMin = contador;
         int numMax = contador + numFigurinhas - 1;
-        contador = numMax + 1; // Atualiza para a próxima página
+        contador = numMax + 1;
 
         Pagina novaPagina(conteudo, numMin, numMax);
         paginas.push_back(novaPagina);
