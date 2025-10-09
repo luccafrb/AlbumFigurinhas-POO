@@ -14,7 +14,7 @@ private:
 
 public:
     // construtor e destrutor
-    Figurinha(int num, string nome, string cont, int status, int numPag);
+    Figurinha(int num, string nome, string cont, int status);
     ~Figurinha();
 
     // getters
@@ -36,6 +36,11 @@ public:
     int getNumPag()
     {
         return numPag;
+    }
+
+    int getNum()
+    {
+        return num;
     }
 
     bool colar();

@@ -39,7 +39,7 @@ void program::adicionarUsuario()
     cout << "Digite a senha do novo usuário: ";
     cin >> senha;
 
-    Usuario novoUsuario(nome, senha);
+    Usuario novoUsuario(nome, senha, todasFigurinhas);
 
     novoUsuario.salvarEmCsv("Dados\\usuarios.csv");
     usuarios.push_back(novoUsuario);
@@ -49,8 +49,8 @@ void program::inicializate()
 {
     cout << "Bem vindo ao Álbum de figurinhas!" << endl;
 
-    usuarios = Usuario::CarregarDeCsv("Dados\\usuarios.csv");
-    figurinhas = Figurinha::CarregarDeCsv("Dados\\figurinhas.csv");
+    todasFigurinhas = Figurinha::CarregarDeCsv("Dados\\figurinhas.csv");
+    usuarios = Usuario::CarregarDeCsv("Dados\\usuarios.csv", todasFigurinhas);
 }
 
 void program::run()
@@ -70,17 +70,47 @@ void program::menuGerenciarAlbum(Usuario *usuarioAtual, Menus &menus)
         switch (escolha)
         {
         case 1:
-            cout << "1 - Ver Álbum" << endl;
+            usuarioAtual->verAlbum();
             break;
         case 2:
-            cout << "2 - Gerenciar a Coleção" << endl;
+            menuGerenciarColecao(usuarioAtual, menus);
             break;
         case 3:
-            usuarioAtual->abrirPacotinho(figurinhas);
+            usuarioAtual->abrirPacotinho(todasFigurinhas);
             break;
         case 4:
-            cout << "4 - Voltar ao Menu Anterior" << endl;
+            menuInicial();
             break;
+        default:
+            cout << "Opção inválida!" << endl;
+        }
+    };
+}
+
+void program::menuGerenciarColecao(Usuario *usuarioAtual, Menus &menus)
+{
+    int escolha = 0;
+
+    while (true)
+    {
+        escolha = menus.mostrarMenuGerenciarColecao();
+
+        switch (escolha)
+        {
+        case 1:
+            usuarioAtual->colarFigurinha();
+            break;
+        case 2:
+            cout << "2 - Disponibilizar para Troca" << endl;
+            break;
+        case 3:
+            cout << "3 - Propor Troca de Figurinhas" << endl;
+            break;
+        case 4:
+            cout << "4 - Revisar Solicitações de Troca" << endl;
+            break;
+        case 5:
+            return;
         default:
             cout << "Opção inválida!" << endl;
         }
@@ -90,10 +120,10 @@ void program::menuGerenciarAlbum(Usuario *usuarioAtual, Menus &menus)
 void program::menuInicial()
 {
     int escolha;
+    Menus menus;
 
     do
     {
-        Menus menus;
         escolha = menus.mostrarMenuInicial();
 
         switch (escolha)
@@ -128,7 +158,7 @@ void program::menuInicial()
             cout << endl;
             cout << "Lista de Figurinhas:" << endl;
 
-            for (Figurinha f : figurinhas)
+            for (Figurinha f : todasFigurinhas)
             {
                 cout << f.getNome() << endl;
             }

@@ -9,8 +9,8 @@
 
 using namespace std;
 
-Figurinha::Figurinha(int num, string nome, string cont, int status, int numPag)
-    : num(num), nome(nome), conteudo(cont), status(status), numPag(numPag)
+Figurinha::Figurinha(int num, string nome, string cont, int status)
+    : num(num), nome(nome), conteudo(cont), status(status)
 {
 }
 
@@ -49,16 +49,22 @@ vector<Figurinha> Figurinha::CarregarDeCsv(const string &arquivo)
 
     string linha;
     getline(fsIn, linha); // pula cabeçalho
+
     while (getline(fsIn, linha))
     {
+        if (linha.empty())
+            continue; // ignora linha vazia
+
         stringstream ss(linha);
-        string numStr, nome, conteudo, status, numPag;
+        string numStr, nome, conteudo;
+
         getline(ss, numStr, ',');
         getline(ss, nome, ',');
-        getline(ss, conteudo, ',');
-        getline(ss, status, ',');
-        getline(ss, numPag, ',');
-        figurinhas.push_back(Figurinha(stoi(numStr), nome, conteudo, stoi(status), stoi(numPag)));
+        getline(ss, conteudo);
+
+        int num = stoi(numStr);
+
+        figurinhas.push_back(Figurinha(num, nome, conteudo, 0));
     }
 
     fsIn.close();

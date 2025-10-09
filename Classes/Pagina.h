@@ -5,11 +5,17 @@
 class Pagina
 {
 private:
-    vector<Figurinha> figurinhas;
+    vector<Figurinha *> figurinhas;
     string titulo;
-    int numMin, numMax;
+    int numMax, numMin;
 
 public:
-    Pagina(/* args */);
+    Pagina(string titulo, int numMin, int numMax);
     ~Pagina();
+
+    int getNumMin();
+    int getNumMax();
+    void mostrarFigurinhas();
+    void adicionarFigurinha(Figurinha *figurinha);
+    string getTitulo();
 };

@@ -8,7 +8,7 @@ class program
 {
 private:
     vector<Usuario> usuarios;
-    vector<Figurinha> figurinhas;
+    vector<Figurinha> todasFigurinhas;
 
 public:
     program();
@@ -19,6 +19,7 @@ public:
 
     void adicionarUsuario();
     void menuGerenciarAlbum(Usuario *usuarioAtual, Menus &menu);
+    void menuGerenciarColecao(Usuario *usuarioAtual, Menus &menus);
     void menuInicial();
     Usuario *login();
 };

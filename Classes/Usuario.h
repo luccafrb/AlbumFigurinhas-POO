@@ -10,14 +10,15 @@ private:
     Album album;
 
 public:
-    Usuario();
-    Usuario(string nome, string senha);
+    Usuario(string nome, string senha, vector<Figurinha> &todasFigurinhas);
     ~Usuario();
 
     string getNome() const;
     string getSenha() const;
 
-    static vector<Usuario> CarregarDeCsv(const string &arquivo);
+    static vector<Usuario> CarregarDeCsv(const string &arquivo, vector<Figurinha> &todasFigurinhas);
     void salvarEmCsv(const string &arquivo);
-    void abrirPacotinho(vector<Figurinha> &figurinhas);
+    void colarFigurinha();
+    void abrirPacotinho(vector<Figurinha> &todasFigurinhas);
+    void verAlbum();
 };
