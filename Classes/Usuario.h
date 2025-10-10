@@ -18,5 +18,5 @@ public:
 
     static vector<Usuario> CarregarDeCsv(const string &arquivo, vector<Figurinha> &todasFigurinhas);
     void salvarEmCsv(const string &arquivo);
-    Album getAlbum();
+    Album& getAlbum();
 };

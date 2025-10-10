@@ -44,6 +44,7 @@ public:
     }
 
     bool colar();
+    void disponibilizarParaTroca();
 
     // vetor de figurinhas
     static vector<Figurinha> CarregarDeCsv(const string &arquivo);

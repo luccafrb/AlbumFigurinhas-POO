@@ -16,10 +16,12 @@ public:
     ~Album();
 
     bool colarFigurinha();
-    void mostrarFigurinhasDaColecao();
+    bool mostrarFigurinhasDaColecao();
     void mostrarFigurinhasColadas();
-    void adicionarFigurinha(Figurinha &figurinha);
+    void adicionarFigurinha(Figurinha figurinha);
     void verAlbum();
     void criarPaginas(vector<Figurinha> &todasFigurinhas);
+    bool disponibilizarFigurinhaParaTroca();
+    bool mostrarFigurinhasIndisponiveisParaTroca();
     void abrirPacotinho(vector<Figurinha> &todasFigurinhas);
 };

@@ -14,6 +14,7 @@ Pagina::Pagina(string titulo, int numMin, int numMax)
 Pagina::~Pagina()
 {
 }
+
 int Pagina::getNumMin()
 {
     return numMin;

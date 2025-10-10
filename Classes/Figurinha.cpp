@@ -3,9 +3,6 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include <ctime>     // para time()
-#include <cstdlib>   // para rand(), srand()
-#include <algorithm> // para find()
 
 using namespace std;
 
@@ -34,6 +31,11 @@ bool Figurinha::colar()
         cout << "Falha em colar a figurinha!" << endl;
         return false;
     }
+}
+
+void Figurinha::disponibilizarParaTroca()
+{
+    status = 1;
 }
 
 vector<Figurinha> Figurinha::CarregarDeCsv(const string &arquivo)

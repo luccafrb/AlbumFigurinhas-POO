@@ -101,7 +101,7 @@ void program::menuGerenciarColecao(Usuario &usuarioAtual, Menus &menus)
             usuarioAtual.getAlbum().colarFigurinha();
             break;
         case 2:
-            cout << "2 - Disponibilizar para Troca" << endl;
+            usuarioAtual.getAlbum().disponibilizarFigurinhaParaTroca();
             break;
         case 3:
             cout << "3 - Propor Troca de Figurinhas" << endl;

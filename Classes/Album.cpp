@@ -20,7 +20,12 @@ bool Album::colarFigurinha()
 
     while (true)
     {
-        mostrarFigurinhasDaColecao();
+        if (mostrarFigurinhasDaColecao() == false)
+        {
+            cout << "Sem figurinhas na coleção." << endl;
+            return false;
+        }
+        
 
         cout << "Digite o número da figurinha que você deseja colar (0 para sair): ";
         cin >> escolha;
@@ -28,30 +33,40 @@ bool Album::colarFigurinha()
         if (escolha == 0)
             break;
 
-        if (escolha < 1 || escolha > figurinhas.size())
-        {
-            cout << "Número inválido! Tente novamente." << endl;
-            continue;
-        }
+        bool figurinhaValida = false;
 
-        Figurinha &f = figurinhas[escolha - 1];
-        f.colar();
-
-        for (Pagina &p : paginas)
+        for (Figurinha &f : figurinhas)
         {
-            if (p.getTitulo() == f.getConteudo())
+            if (f.getNum() == escolha)
             {
-                p.adicionarFigurinha(&f);
-                cout << "Figurinha " << f.getNome() << " colada na página " << p.getTitulo() << "!" << endl;
+                f.colar();
+
+                for (Pagina &p : paginas)
+                {
+                    if (p.getTitulo() == f.getConteudo())
+                    {
+                        p.adicionarFigurinha(&f);
+                        cout << "Colada na página " << p.getTitulo() << endl;
+                        break;
+                    }
+                }
+
+                figurinhaValida = true;
                 break;
             }
         }
+
+        if (!figurinhaValida)
+        {
+            return false;
+        }
+        
     }
 
     return true;
 }
 
-void Album::adicionarFigurinha(Figurinha &figurinha)
+void Album::adicionarFigurinha(Figurinha figurinha)
 {
     figurinhas.push_back(figurinha);
 }
@@ -109,23 +124,24 @@ void Album::mostrarFigurinhasColadas()
     }
 }
 
-void Album::mostrarFigurinhasDaColecao()
+bool Album::mostrarFigurinhasDaColecao()
 {
     if (figurinhas.size() == 0)
     {
-        cout << "Sem figurinhas na coleção." << endl;
-        return;
+        return false;
     }
 
     cout << "-- Figurinhas na coleção --" << endl;
 
-    for (int i = 0; i < figurinhas.size(); i++)
+    for (Figurinha &f : figurinhas)
     {
-        if (figurinhas[i].getStatus() == 0)
+        if (f.getStatus() == 0)
         {
-            cout << i + 1 << " - " << figurinhas[i].getNome() << endl;
+            cout << f.getNum() << " - " << f.getNome() << endl;
         }
     }
+
+    return true;
 }
 
 void Album::criarPaginas(vector<Figurinha> &todasFigurinhas)
@@ -167,6 +183,64 @@ void Album::criarPaginas(vector<Figurinha> &todasFigurinhas)
         Pagina novaPagina(conteudo, numMin, numMax);
         paginas.push_back(novaPagina);
     }
+
+}
+
+bool Album::disponibilizarFigurinhaParaTroca()
+{
+    if(!mostrarFigurinhasIndisponiveisParaTroca())
+        return false;
+
+    int escolha;
+    cout << "Digite o número da figurinha que você deseja liberar para troca: ";
+    
+    cin >> escolha;
+
+    for (Figurinha &f : figurinhas)
+    {
+        if (f.getNum() == escolha && f.getStatus() == 0)
+        {
+            f.disponibilizarParaTroca();
+            cout << "Figurinha \'" << f.getNome() << "\' disponibilizada para troca!" << endl;
+        }
+        
+    }
+    return true;
+}
+
+bool Album::mostrarFigurinhasIndisponiveisParaTroca()
+{
+    bool existeIndisponivel = false;
+    for (Figurinha &f : figurinhas)
+    {
+        if (f.getStatus() == 0)
+        {
+            existeIndisponivel = true;
+            break;
+        }
+    }
+
+    if(!existeIndisponivel)
+    {
+        cout << "Sem figurinhas indisponíveis pra troca." << endl;
+        cout << "---------------------" << endl;
+        cout << "Pressione ENTER para continuar..." << endl;
+        getchar();
+        getchar();
+    }
+
+    cout << "-- Figurinhas indisponíveis para troca --" << endl;
+
+    for (Figurinha &f : figurinhas)
+    {
+        if (f.getStatus() == 0)
+        {
+            cout << f.getNum() << " - " << f.getNome() << endl;
+        }
+    }
+
+    cout << "---------------------------------------" << endl;
+    return true;
 }
 
 void Album::abrirPacotinho(vector<Figurinha> &todasFigurinhas)
@@ -198,10 +272,10 @@ void Album::abrirPacotinho(vector<Figurinha> &todasFigurinhas)
     for (Figurinha f : pacotinho)
     {
         cout << f.getNome() << endl;
-        adicionarFigurinha(f);
+        figurinhas.push_back(f);
     }
-
     cout << "---------------------" << endl;
+
     cout << "Pressione ENTER para continuar..." << endl;
     getchar();
     getchar();

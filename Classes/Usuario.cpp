@@ -22,7 +22,7 @@ string Usuario::getSenha() const
     return senha;
 }
 
-Album Usuario::getAlbum()
+Album& Usuario::getAlbum()
 {
     return album;
 }
