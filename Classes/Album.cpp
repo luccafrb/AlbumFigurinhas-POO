@@ -188,8 +188,16 @@ void Album::criarPaginas(vector<Figurinha> &todasFigurinhas)
 
 bool Album::disponibilizarFigurinhaParaTroca()
 {
-    if(!mostrarFigurinhasIndisponiveisParaTroca())
+    if(mostrarFigurinhasIndisponiveisParaTroca() == false)
+    {
+        cout << "Sem figurinhas indisponíveis pra troca." << endl;
+        cout << "---------------------" << endl;
+        cout << "Pressione ENTER para continuar..." << endl;
+        getchar();
+        getchar();
+        
         return false;
+    }
 
     int escolha;
     cout << "Digite o número da figurinha que você deseja liberar para troca: ";
@@ -222,11 +230,7 @@ bool Album::mostrarFigurinhasIndisponiveisParaTroca()
 
     if(!existeIndisponivel)
     {
-        cout << "Sem figurinhas indisponíveis pra troca." << endl;
-        cout << "---------------------" << endl;
-        cout << "Pressione ENTER para continuar..." << endl;
-        getchar();
-        getchar();
+        return false;
     }
 
     cout << "-- Figurinhas indisponíveis para troca --" << endl;
