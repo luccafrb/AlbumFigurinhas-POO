@@ -2,6 +2,7 @@
 #include "program.h"
 #include "Interface/Menus.h"
 #include "Classes/Usuario.h"
+#include "Classes/ColarFigurinhas.h"
 
 using namespace std;
 

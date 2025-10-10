@@ -1,4 +1,5 @@
 #include "Usuario.h"
+#include "ColarFigurinhas.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -34,7 +35,15 @@ void Usuario::verAlbum()
 
 void Usuario::colarFigurinha()
 {
-    album.colarFigurinha();
+    ColarFigurinhas album;  // lê os CSVs automaticamente
+    int numero;
+
+    std::cout << "Número da figurinha que deseja colar: ";
+    std::cin >> numero;
+
+    album.colarFigurinha(numero);
+    album.mostrarFigurinhas();
+    album.salvarCSV(); // salva automaticamente
 }
 
 void Usuario::salvarEmCsv(const string &arquivo)
