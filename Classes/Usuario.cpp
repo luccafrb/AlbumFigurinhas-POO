@@ -22,19 +22,9 @@ string Usuario::getSenha() const
     return senha;
 }
 
-void Usuario::abrirPacotinho(vector<Figurinha> &todasFigurinhas)
+Album Usuario::getAlbum()
 {
-    album.abrirPacotinho(todasFigurinhas);
-}
-
-void Usuario::verAlbum()
-{
-    album.verAlbum();
-}
-
-void Usuario::colarFigurinha()
-{
-    album.colarFigurinha();
+    return album;
 }
 
 void Usuario::salvarEmCsv(const string &arquivo)
