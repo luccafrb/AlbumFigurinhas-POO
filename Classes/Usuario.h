@@ -18,7 +18,7 @@ public:
 
     static vector<Usuario> CarregarDeCsv(const string &arquivo, vector<Figurinha> &todasFigurinhas);
     void salvarEmCsv(const string &arquivo);
-    void colarFigurinha();
-    void abrirPacotinho(vector<Figurinha> &todasFigurinhas);
-    void verAlbum();
+    Album getAlbum();  // This should return Album, not void
+    void verAlbum();   // Add this declaration if missing
+    void colarFigurinha();  // Add this declaration if missing
 };

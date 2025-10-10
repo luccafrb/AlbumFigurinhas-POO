@@ -71,16 +71,16 @@ void program::menuGerenciarAlbum(Usuario &usuarioAtual, Menus &menus)
         switch (escolha)
         {
         case 1:
-            usuarioAtual.verAlbum();
+            usuarioAtual.getAlbum().verAlbum();
             break;
         case 2:
             menuGerenciarColecao(usuarioAtual, menus);
             break;
         case 3:
-            usuarioAtual.abrirPacotinho(todasFigurinhas);
+            usuarioAtual.getAlbum().abrirPacotinho(todasFigurinhas);
             break;
         case 4:
-            menuInicial();
+            return;
             break;
         default:
             cout << "Opção inválida!" << endl;
@@ -99,7 +99,7 @@ void program::menuGerenciarColecao(Usuario &usuarioAtual, Menus &menus)
         switch (escolha)
         {
         case 1:
-            usuarioAtual.colarFigurinha();
+            usuarioAtual.getAlbum().colarFigurinha();
             break;
         case 2:
             cout << "2 - Disponibilizar para Troca" << endl;

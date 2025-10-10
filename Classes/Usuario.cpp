@@ -23,9 +23,9 @@ string Usuario::getSenha() const
     return senha;
 }
 
-void Usuario::abrirPacotinho(vector<Figurinha> &todasFigurinhas)
+Album Usuario::getAlbum()
 {
-    album.abrirPacotinho(todasFigurinhas);
+    return album; 
 }
 
 void Usuario::verAlbum()
@@ -35,15 +35,15 @@ void Usuario::verAlbum()
 
 void Usuario::colarFigurinha()
 {
-    ColarFigurinhas album;  // lê os CSVs automaticamente
+    ColarFigurinhas colecao;  // lê os CSVs automaticamente
     int numero;
 
     std::cout << "Número da figurinha que deseja colar: ";
     std::cin >> numero;
 
-    album.colarFigurinha(numero);
-    album.mostrarFigurinhas();
-    album.salvarCSV(); // salva automaticamente
+    colecao.colarFigurinha(numero);
+    colecao.mostrarFigurinhas();
+    colecao.salvarCSV(); // salva automaticamente
 }
 
 void Usuario::salvarEmCsv(const string &arquivo)
