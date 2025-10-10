@@ -15,4 +15,6 @@ public:
     Troca(/* args */);
 
     ~Troca();
+
+    void aceitar(bool decisao);
 };
