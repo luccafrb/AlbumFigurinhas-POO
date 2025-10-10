@@ -6,7 +6,6 @@
 #include "Classes/Usuario.h"
 #include "Classes/Figurinha.h"
 #include "program.h"
-#include "Classes/ColarFigurinhas.h"
 
 using namespace std;
 
