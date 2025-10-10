@@ -79,7 +79,7 @@ void program::menuGerenciarAlbum(Usuario &usuarioAtual, Menus &menus)
             usuarioAtual.getAlbum().abrirPacotinho(todasFigurinhas);
             break;
         case 4:
-            menuInicial();
+            return;
             break;
         default:
             cout << "Opção inválida!" << endl;
