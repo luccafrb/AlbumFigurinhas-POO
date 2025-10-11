@@ -315,5 +315,10 @@ void Album::abrirPacotinho(vector<Figurinha> &todasFigurinhas)
 
 void Album::adicionarRequisicao(Troca &requisicao)
 {
+    requisicoesTroca.push_back(requisicao);
+}
 
+vector<Troca>& Album::getRequisicoes()
+{
+    return requisicoesTroca;  // Retorna o vetor de requisições
 }

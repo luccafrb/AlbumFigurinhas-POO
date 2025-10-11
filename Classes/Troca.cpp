@@ -6,6 +6,11 @@ Troca::Troca(string proponente, int requerida, int disponivel)
 Troca::~Troca()
 {}
 
+int Troca::setStatus(int status)
+{
+    this->status = status;    
+}
+
 void Troca::aceitar(bool decisao)
 {
     if (decisao == 1)

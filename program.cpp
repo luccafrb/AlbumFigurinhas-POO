@@ -118,7 +118,7 @@ void program::menuGerenciarColecao(Usuario &usuarioAtual, Menus &menus)
             usuarioAtual.proporTroca(listaUsuarios);
             break;
         case 4:
-            cout << "4 - Revisar Solicitações de Troca" << endl;
+            gerenciarRequisicoes(usuarioAtual);
             break;
         case 5:
             return;
@@ -219,5 +219,82 @@ Usuario &program::login()
             }
         }
         cout << "Nome de usuário não encontrado. Tente novamente." << endl;
+    }
+}
+
+void program::gerenciarRequisicoes(Usuario &usuarioAtual)
+{
+    cout << "-- Requisições de Troca --" << endl;
+    
+    // Exibe as requisições do usuário
+    bool temRequisicao = false;
+    for (int i = 0; i < usuarioAtual.getAlbum().getRequisicoes().size(); i++)
+    {
+        Troca& troca = usuarioAtual.getAlbum().getRequisicoes()[i];
+        cout << i + 1 << " - Requisição de " << troca.getNomeProponente() << endl;
+        cout << "Figurinha requerida: " << troca.getFigurinhaRequerida() << endl;
+        cout << "Figurinha oferecida: " << troca.getFigurinhaDisponivel() << endl;
+        
+        string status;
+        switch (troca.getStatus())
+        {
+            case 0:
+                cout << "Status: Aguardando análise" << endl;
+                break;
+            case 1:
+                cout << "Status: Aceita" << endl;
+                break;
+            case 2:
+                cout << "Status: Recusada" << endl;
+                break;
+        }
+        
+        temRequisicao = true;
+    }
+
+    if (!temRequisicao)
+    {
+        cout << "Não há requisições pendentes." << endl;
+        return;
+    }
+
+    cout << "Digite o número da requisição que você deseja gerenciar: ";
+    int escolha;
+    cin >> escolha;
+
+    Troca &trocaSelecionada = usuarioAtual.getAlbum().getRequisicoes()[escolha - 1];
+
+    // Verifica o status da requisição
+    if (trocaSelecionada.getStatus() == 1)
+    {
+        cout << "Requisição já aceita." << endl;
+    }
+    else if (trocaSelecionada.getStatus() == 2)
+    {
+        cout << "Requisição já recusada." << endl;
+    }
+    else
+    {
+        cout << " -- Requisição de " << trocaSelecionada.getNomeProponente() << endl;
+        cout << "Figurinha requerida: " << trocaSelecionada.getFigurinhaRequerida() << endl;
+        cout << "Figurinha oferecida: " << trocaSelecionada.getFigurinhaDisponivel() << endl;
+        cout << "Você deseja aceitar ou recusar essa requisição? 1 - Aceitar | 2 - Recusar: ";
+        
+        int decisao;
+        cin >> decisao;
+
+        if (decisao == 1)
+        {
+            trocaSelecionada.setStatus(1);  // Marca como aceita
+            cout << "Requisição aceita!" << endl;
+
+            
+
+        }
+        else
+        {
+            trocaSelecionada.setStatus(2);  // Marca como recusada
+            cout << "Requisição recusada." << endl;
+        }
     }
 }

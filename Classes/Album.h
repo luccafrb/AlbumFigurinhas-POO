@@ -29,10 +29,6 @@ public:
         // Métodos para gerenciamento de requisições de troca
     void adicionarRequisicao(Troca& requisicao);
     vector<Troca>& getRequisicoes();
-    
-    // Método auxiliar para remoção (necessário ao aceitar a troca)
-    bool removerFigurinha(int numFigurinha);
-    
-    // NOVO MÉTODO: Executa a troca real das figurinhas
-    void realizarTroca(Album& albumParceiro, const Troca& proposta);
+
+    void gerenciarRequisicoes();
 };

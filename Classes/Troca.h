@@ -20,6 +20,7 @@ public:
     int getFigurinhaRequerida();
     int getFigurinhaDisponivel();
     int getStatus();
+    int setStatus(int status);
 
     void aceitar(bool decisao);
 };
