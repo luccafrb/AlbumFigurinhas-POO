@@ -195,7 +195,7 @@ bool Album::disponibilizarFigurinhaParaTroca()
         cout << "Pressione ENTER para continuar..." << endl;
         getchar();
         getchar();
-        
+
         return false;
     }
 
@@ -247,6 +247,34 @@ bool Album::mostrarFigurinhasIndisponiveisParaTroca()
     return true;
 }
 
+bool Album::mostrarFigurinhasDisponiveisParaTroca()
+{
+    if (figurinhas.empty())
+    {
+        cout << "(nenhuma figurinha no álbum)" << endl;
+        return false;
+    }
+
+    bool temDisponivel = false;
+
+    for (Figurinha &f : figurinhas)
+    {
+        if (f.getStatus() == 2)
+        {
+            cout << f.getNum() << " - " << f.getNome() << endl;
+            temDisponivel = true;
+        }
+    }
+
+    if (!temDisponivel)
+    {
+        cout << "(nenhuma figurinha disponível para troca)" << endl;
+    }
+
+    return temDisponivel;
+}
+
+
 void Album::abrirPacotinho(vector<Figurinha> &todasFigurinhas)
 {
     vector<Figurinha> pacotinho;
@@ -283,4 +311,9 @@ void Album::abrirPacotinho(vector<Figurinha> &todasFigurinhas)
     cout << "Pressione ENTER para continuar..." << endl;
     getchar();
     getchar();
+}
+
+void Album::adicionarRequisicao(Troca &requisicao)
+{
+
 }

@@ -12,9 +12,14 @@ private:
     // status da troca pode ser: 0 (aguardando análise), 1 (aceita), 2 (recusada)
 
 public:
-    Troca(/* args */);
+    Troca(string proponente, int requerida, int disponivel);
 
     ~Troca();
+
+    string getNomeProponente();
+    int getFigurinhaRequerida();
+    int getFigurinhaDisponivel();
+    int getStatus();
 
     void aceitar(bool decisao);
 };

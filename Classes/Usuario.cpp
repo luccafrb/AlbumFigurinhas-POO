@@ -63,3 +63,65 @@ vector<Usuario> Usuario::CarregarDeCsv(const string &arquivo, vector<Figurinha> 
 
     return usuarios;
 }
+
+void Usuario::proporTroca(vector<Usuario*> &listaUsuarios)
+{
+    for (Usuario *u : listaUsuarios)
+    {
+        cout << "-- Figurinhas de " << u->getNome() << ":" << endl;
+        u->getAlbum().mostrarFigurinhasDisponiveisParaTroca();
+    }
+
+    string escolha;
+    cout << "Digite o nome do usuário que você deseja trocar: ";
+    cin >> escolha;
+
+    Usuario* destino = nullptr;
+
+    while (true)
+    {
+        bool usuarioValido = false;
+
+        for (Usuario *u : listaUsuarios)
+        {
+            if (u->getNome() == escolha)
+            {
+                usuarioValido = true;
+                destino = u;
+                break;
+            }
+        }
+
+        if (!usuarioValido)
+        {
+            cout << "Usuário não encontrado. Digite novamente: ";
+            cin >> escolha;
+            continue;
+        }
+
+        cout << "Lista de figurinhas disponíveis para troca de " << destino->getNome() << ":" << endl;
+
+        if (!destino->getAlbum().mostrarFigurinhasDisponiveisParaTroca())
+        {
+            cout << "Lista vazia! Escolha outro usuário: ";
+            cin >> escolha;
+            continue;
+        }
+
+        break; // tudo certo
+    }
+
+    int numFigurinhaRequerida;
+    cout << "Digite o número da figurinha que você deseja receber: ";
+    cin >> numFigurinhaRequerida;
+
+    cout << "Suas figurinhas disponíveis para troca:" << endl;
+    album.mostrarFigurinhasDisponiveisParaTroca();
+
+    int numFigurinhaOferecida;
+    cout << "Digite o número da figurinha que você deseja oferecer: ";
+    cin >> numFigurinhaOferecida;
+
+    Troca troca(nome, numFigurinhaRequerida, numFigurinhaOferecida);
+    destino->getAlbum().adicionarRequisicao(troca);
+};

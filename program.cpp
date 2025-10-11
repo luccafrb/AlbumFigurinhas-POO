@@ -91,6 +91,17 @@ void program::menuGerenciarColecao(Usuario &usuarioAtual, Menus &menus)
 {
     int escolha = 0;
 
+    vector<Usuario*> listaUsuarios;
+
+    for (Usuario &u : usuarios)
+    {
+        if (u.getNome() != usuarioAtual.getNome())
+        {
+            listaUsuarios.push_back(&u);
+        }
+    }
+    
+
     while (true)
     {
         escolha = menus.mostrarMenuGerenciarColecao();
@@ -104,7 +115,7 @@ void program::menuGerenciarColecao(Usuario &usuarioAtual, Menus &menus)
             usuarioAtual.getAlbum().disponibilizarFigurinhaParaTroca();
             break;
         case 3:
-            cout << "3 - Propor Troca de Figurinhas" << endl;
+            usuarioAtual.proporTroca(listaUsuarios);
             break;
         case 4:
             cout << "4 - Revisar Solicitações de Troca" << endl;
@@ -136,7 +147,7 @@ void program::menuInicial()
 
         case 2:
         {
-            Usuario usuarioAtual = login();
+            Usuario& usuarioAtual = login();
 
             menuGerenciarAlbum(usuarioAtual, menus);
             break;

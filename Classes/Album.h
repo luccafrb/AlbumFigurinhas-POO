@@ -9,7 +9,7 @@ class Album
 private:
     vector<Pagina> paginas;
     vector<Figurinha> figurinhas;
-    Troca requisicoesTroca;
+    vector<Troca> requisicoesTroca;
 
 public:
     Album(vector<Figurinha> &todasFigurinhas);
@@ -23,5 +23,16 @@ public:
     void criarPaginas(vector<Figurinha> &todasFigurinhas);
     bool disponibilizarFigurinhaParaTroca();
     bool mostrarFigurinhasIndisponiveisParaTroca();
+    bool mostrarFigurinhasDisponiveisParaTroca();
     void abrirPacotinho(vector<Figurinha> &todasFigurinhas);
+
+        // Métodos para gerenciamento de requisições de troca
+    void adicionarRequisicao(Troca& requisicao);
+    vector<Troca>& getRequisicoes();
+    
+    // Método auxiliar para remoção (necessário ao aceitar a troca)
+    bool removerFigurinha(int numFigurinha);
+    
+    // NOVO MÉTODO: Executa a troca real das figurinhas
+    void realizarTroca(Album& albumParceiro, const Troca& proposta);
 };
