@@ -73,7 +73,7 @@ void Usuario::proporTroca(vector<Usuario*> &listaUsuarios)
     }
 
     string escolha;
-    cout << "Digite o nome do usuário que você deseja trocar: ";
+    cout << "Digite o nome do usuário que você deseja trocar (Digite:'sair' para sair desse menu): ";
     cin >> escolha;
 
     Usuario* destino = nullptr;
@@ -81,6 +81,11 @@ void Usuario::proporTroca(vector<Usuario*> &listaUsuarios)
     while (true)
     {
         bool usuarioValido = false;
+
+    if (escolha == "sair")
+    cout << "Saindo do menu de trocas...\n";
+        return;
+        
 
         for (Usuario *u : listaUsuarios)
         {
