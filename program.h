@@ -22,4 +22,5 @@ public:
     void menuGerenciarColecao(Usuario &usuarioAtual, Menus &menus);
     void menuInicial();
     Usuario &login();
+    void gerenciarRequisicoes(Usuario &usuarioAtual, vector<Usuario*> listaUsuarios);
 };

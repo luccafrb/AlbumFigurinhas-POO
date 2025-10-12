@@ -38,6 +38,11 @@ void Figurinha::disponibilizarParaTroca()
     status = 2;
 }
 
+void Figurinha::indisponibilizarParaTroca()
+{
+    status = 0;
+}
+
 vector<Figurinha> Figurinha::CarregarDeCsv(const string &arquivo)
 {
     vector<Figurinha> figurinhas;

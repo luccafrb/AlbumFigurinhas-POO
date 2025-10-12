@@ -108,12 +108,14 @@ void Usuario::proporTroca(vector<Usuario*> &listaUsuarios)
             continue;
         }
 
-        break; // tudo certo
+        break;
     }
 
     int numFigurinhaRequerida;
     cout << "Digite o número da figurinha que você deseja receber: ";
     cin >> numFigurinhaRequerida;
+
+    Figurinha* figurinhaRequerida = destino->getAlbum().obterFigurinhaPeloNumParaTroca(numFigurinhaRequerida);
 
     cout << "Suas figurinhas disponíveis para troca:" << endl;
     album.mostrarFigurinhasDisponiveisParaTroca();
@@ -122,6 +124,12 @@ void Usuario::proporTroca(vector<Usuario*> &listaUsuarios)
     cout << "Digite o número da figurinha que você deseja oferecer: ";
     cin >> numFigurinhaOferecida;
 
-    Troca troca(nome, numFigurinhaRequerida, numFigurinhaOferecida);
+    
+    Figurinha* figurinhaOferecida = getAlbum().obterFigurinhaPeloNumParaTroca(numFigurinhaOferecida);
+
+    Troca troca(nome, *figurinhaRequerida, *figurinhaOferecida);
     destino->getAlbum().adicionarRequisicao(troca);
+
+    cout << "Requisição de troca enviada com sucesso para " << destino->getNome() << endl;
+
 };

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "Figurinha.h"
 
 using namespace std;
 
@@ -8,19 +9,19 @@ class Troca
 {
 private:
     string nomeProponente;
-    int figurinhaRequerida, figurinhaDisponivel, status;
-    // status da troca pode ser: 0 (aguardando análise), 1 (aceita), 2 (recusada)
+    Figurinha figurinhaRequerida, figurinhaOferecida;
+    int status;
 
 public:
-    Troca(string proponente, int requerida, int disponivel);
+    Troca(string proponente, Figurinha &requerida, Figurinha &disponivel);
 
     ~Troca();
 
     string getNomeProponente();
-    int getFigurinhaRequerida();
-    int getFigurinhaDisponivel();
+    Figurinha *getFigurinhaRequerida();
+    Figurinha *getFigurinhaOferecida();
     int getStatus();
-    int setStatus(int status);
 
     void aceitar(bool decisao);
+    void mostrar();
 };

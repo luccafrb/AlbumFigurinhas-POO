@@ -17,12 +17,10 @@ public:
 
     bool colarFigurinha();
     bool mostrarFigurinhasDaColecao();
-    void mostrarFigurinhasColadas();
     void adicionarFigurinha(Figurinha figurinha);
     void verAlbum();
     void criarPaginas(vector<Figurinha> &todasFigurinhas);
     bool disponibilizarFigurinhaParaTroca();
-    bool mostrarFigurinhasIndisponiveisParaTroca();
     bool mostrarFigurinhasDisponiveisParaTroca();
     void abrirPacotinho(vector<Figurinha> &todasFigurinhas);
 
@@ -30,5 +28,10 @@ public:
     void adicionarRequisicao(Troca& requisicao);
     vector<Troca>& getRequisicoes();
 
-    void gerenciarRequisicoes();
+    void adicionarFigurinha(Figurinha *figurinha);
+    void removerFigurinha(Figurinha *figurinha);
+
+    Figurinha *obterFigurinhaPeloNumParaTroca(int num);
+
+    bool mostrarRequisicoes();
 };

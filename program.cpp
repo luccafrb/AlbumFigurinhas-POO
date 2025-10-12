@@ -77,6 +77,9 @@ void program::menuGerenciarAlbum(Usuario &usuarioAtual, Menus &menus)
             break;
         case 3:
             usuarioAtual.getAlbum().abrirPacotinho(todasFigurinhas);
+            cout << "Precione qualquer tela para continuar";
+            getchar();
+            getchar();
             break;
         case 4:
             return;
@@ -109,18 +112,36 @@ void program::menuGerenciarColecao(Usuario &usuarioAtual, Menus &menus)
         switch (escolha)
         {
         case 1:
-            usuarioAtual.getAlbum().colarFigurinha();
+            usuarioAtual.getAlbum().mostrarFigurinhasDaColecao();
+            cout << "Precione qualquer tela para continuar";
+            getchar();
+            getchar();
             break;
         case 2:
-            usuarioAtual.getAlbum().disponibilizarFigurinhaParaTroca();
+            usuarioAtual.getAlbum().mostrarFigurinhasDisponiveisParaTroca();
+            cout << "Precione qualquer tela para continuar";
+            getchar();
+            getchar();
             break;
         case 3:
-            usuarioAtual.proporTroca(listaUsuarios);
+            usuarioAtual.getAlbum().colarFigurinha();
+            cout << "Precione qualquer tela para continuar";
+            getchar();
+            getchar();
             break;
         case 4:
-            cout << "Não configurado" << endl;
+            usuarioAtual.getAlbum().disponibilizarFigurinhaParaTroca();
             break;
         case 5:
+            gerenciarRequisicoes(usuarioAtual, listaUsuarios);
+            break;
+        case 6:
+            usuarioAtual.proporTroca(listaUsuarios);
+            cout << "Precione qualquer tela para continuar";
+            getchar();
+            getchar();
+            break;
+        case 7:
             return;
         default:
             cout << "Opção inválida!" << endl;
@@ -185,7 +206,7 @@ void program::menuInicial()
 Usuario &program::login()
 {
     string senha, nome;
-    cout << "-- Lista de Usuários --" << endl;
+    cout << "Lista de Usuários:" << endl;
     for (Usuario &u : usuarios)
     {
         cout << "- " << u.getNome() << endl;
@@ -222,3 +243,86 @@ Usuario &program::login()
     }
 }
 
+void program::gerenciarRequisicoes(Usuario &usuarioAtual, vector<Usuario*> listaUsuarios)
+{
+
+    if (!usuarioAtual.getAlbum().mostrarRequisicoes())
+    {
+        return;
+    }
+    
+    int opcao = -1;
+    while (true)
+    {
+        cout << "Digite o número da requisição que você deseja gerenciar (0 - Voltar): ";
+        cin >> opcao;
+
+        if (opcao == 0)
+        {
+            return;
+        }
+
+        vector<Troca>* trocas = &usuarioAtual.getAlbum().getRequisicoes();
+        Troca* trocaEscolhida = &usuarioAtual.getAlbum().getRequisicoes()[opcao - 1];
+
+        Usuario* usuarioProponente;
+        for (Usuario* u : listaUsuarios)
+        {
+            if (trocaEscolhida->getNomeProponente() == u->getNome())
+            {
+                usuarioProponente = u;
+            }
+        }
+        
+
+        int decisao;
+
+        if (opcao <= trocas->size() && trocas->size() > 0)
+        {
+            trocaEscolhida->mostrar();
+
+            switch (trocaEscolhida->getStatus())
+            {
+            case 1:
+                cout << "Requisição já aceita!" << endl;
+                continue;
+            
+            case 2:
+                cout << "Requisição já recusada!" << endl;
+                continue;
+
+            default:
+                cout << "O que você deseja fazer com essa requisição? 1 - Aceitar / 2 - Recusar / 0 - voltar: ";
+                cin >> decisao;
+
+                if (decisao == 0)
+                {
+                    continue;
+                }
+                
+                break;
+            }
+        }
+
+        if(decisao == 1)
+        {
+            trocaEscolhida->aceitar(true);
+
+            Figurinha* figOferecida = trocaEscolhida->getFigurinhaOferecida();
+            Figurinha* figRequerida = trocaEscolhida->getFigurinhaRequerida();
+            
+            usuarioAtual.getAlbum().adicionarFigurinha(figOferecida);
+            usuarioAtual.getAlbum().removerFigurinha(figRequerida);
+
+            usuarioProponente->getAlbum().adicionarFigurinha(figRequerida);
+            usuarioProponente->getAlbum().removerFigurinha(figOferecida);
+
+            cout << "Troca realizada!" << endl;
+        } 
+        else if(decisao == 2)
+        {
+            trocaEscolhida->aceitar(false);
+            cout << "Requisição recusada!" << endl;
+        }
+    }       
+}
