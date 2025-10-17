@@ -1,5 +1,8 @@
 # Álbum de Figurinhas Virtual
-
+## Equipe
+- Vinícius Sandrin Lemes  
+- Lucca
+- Marcelle 
 Este é um projeto de simulação de um aplicativo de álbum de figurinhas virtual, desenvolvido como trabalho prático para a disciplina de **Algoritmos e Programação: Orientação a Objetos** na Escola Politécnica da UNISINOS.
 
 ---
