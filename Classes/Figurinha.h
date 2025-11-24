@@ -7,7 +7,7 @@ using namespace std;
 
 class Figurinha
 {
-private:
+protected:
     string nome, conteudo;
     int num, status, numPag;
     // status da figurinha pode ser:  0 (na coleção), 1 (colada no álbum), 2 (disponível para troca)
@@ -45,8 +45,10 @@ public:
 
     bool colar();
     void disponibilizarParaTroca();
-
     void indisponibilizarParaTroca();
+
+    virtual void mostrarDetalhes() = 0;
+    virtual int getValorTroca();
 
     // vetor de figurinhas
     static vector<Figurinha> CarregarDeCsv(const string &arquivo);
