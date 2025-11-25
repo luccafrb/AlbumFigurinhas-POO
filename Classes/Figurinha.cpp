@@ -1,4 +1,8 @@
 #include "Figurinha.h"
+#include "FigurinhaPokemon.h"
+#include "FigurinhaEvolucao.h"
+#include "FigurinhaLocal.h"
+#include "FigurinhaMegaEvolucao.h"
 #include <vector>
 #include <fstream>
 #include <sstream>
@@ -43,35 +47,87 @@ void Figurinha::indisponibilizarParaTroca()
     status = 0;
 }
 
-vector<Figurinha> Figurinha::CarregarDeCsv(const string &arquivo)
+// A assinatura agora usa Figurinha* para suportar polimorfismo
+vector<Figurinha *> Figurinha::CarregarDeCsv(const string &arquivo)
 {
-    vector<Figurinha> figurinhas;
+    // A coleção agora armazena ponteiros, permitindo polimorfismo e herança.
+    vector<Figurinha *> figurinhas;
 
     ifstream fsIn(arquivo);
     if (!fsIn.is_open())
     {
-        cout << "Erro ao abrir arquivo: " << arquivo << endl;
+        cerr << "Erro ao abrir arquivo: " << arquivo << endl; // Usar cerr para erros
         return figurinhas;
     }
 
     string linha;
-    getline(fsIn, linha); // pula cabeçalho
+    getline(fsIn, linha); // Pula cabeçalho
 
     while (getline(fsIn, linha))
     {
         if (linha.empty())
-            continue; // ignora linha vazia
+            continue;
 
         stringstream ss(linha);
-        string numStr, nome, conteudo;
+        string numStr, nome, conteudo, tipoFigurinha;
+        string dado1, dado2, dado3, dado4; // Campos específicos
+        Figurinha *novaFigurinha = nullptr;
+        int statusInicial = 0; // Todas figurinhas começam na coleção
 
+        // 1. LÊ OS CAMPOS BASE
         getline(ss, numStr, ',');
         getline(ss, nome, ',');
-        getline(ss, conteudo);
+        getline(ss, conteudo, ',');
+        getline(ss, tipoFigurinha, ','); // CAMPO CHAVE PARA DECISÃO (TIPO)
+
+        // 2. LÊ TODOS OS DADOS ESPECÍFICOS (para simplificar a leitura da linha)
+        getline(ss, dado1, ','); // dado_1
+        getline(ss, dado2, ','); // dado_2
+        getline(ss, dado3, ','); // dado_3
+        getline(ss, dado4);      // dado_4 (lê até o final da linha)
 
         int num = stoi(numStr);
 
-        figurinhas.push_back(Figurinha(num, nome, conteudo, 0));
+        // 3. DECIDE QUAL CLASSE CONCRETA INSTANCIAR DINAMICAMENTE
+        if (tipoFigurinha == "POKEMON")
+        {
+            // FigurinhaPokemon(num, nome, cont, status, nivel, tipoPrincipal)
+            int nivel = stoi(dado1);
+            string tipoPrincipal = dado2;
+            novaFigurinha = new FigurinhaPokemon(num, nome, conteudo, statusInicial, nivel, tipoPrincipal);
+        }
+        else if (tipoFigurinha == "LOCAL")
+        {
+            // FigurinhaLocal(num, nome, cont, status, regiao, lider)
+            string regiao = dado1;
+            string liderGinasio = dado2;
+            novaFigurinha = new FigurinhaLocal(num, nome, conteudo, statusInicial, regiao, liderGinasio);
+        }
+        else if (tipoFigurinha == "EVOLUCAO")
+        {
+            // FigurinhaEvolucao(num, nome, cont, status, estagio, proximoPokemon)
+            int estagio = stoi(dado1);
+            string proximoPokemon = dado2;
+            novaFigurinha = new FigurinhaEvolucao(num, nome, conteudo, statusInicial, estagio, proximoPokemon);
+        }
+        else if (tipoFigurinha == "MEGA")
+        {
+            // FigurinhaMegaEvolucao(num, nome, cont, status, estagio, proximoPokemon, pedraMega)
+            int estagio = stoi(dado1);
+            string proximoPokemon = dado2;
+            string pedraMega = dado3;
+            novaFigurinha = new FigurinhaMegaEvolucao(num, nome, conteudo, statusInicial, estagio, proximoPokemon, pedraMega);
+        }
+        else
+        {
+            cerr << "AVISO: Linha ignorada devido a TIPO desconhecido: " << nome << endl;
+        }
+
+        // 4. ADICIONA O PONTEIRO À COLEÇÃO
+        if (novaFigurinha != nullptr)
+        {
+            figurinhas.push_back(novaFigurinha);
+        }
     }
 
     fsIn.close();

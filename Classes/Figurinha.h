@@ -51,5 +51,5 @@ public:
     virtual int getValorTroca();
 
     // vetor de figurinhas
-    static vector<Figurinha> CarregarDeCsv(const string &arquivo);
+    static vector<Figurinha *> CarregarDeCsv(const string &arquivo);
 };
