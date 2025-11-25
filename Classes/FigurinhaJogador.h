@@ -10,7 +10,7 @@ private:
     int nivel;
 
 public:
-    FigurinhaJogador(/* args */);
+    FigurinhaJogador(int num, string nome, string cont, int status, int nivel);
     ~FigurinhaJogador();
 
     void mostrarDetalhes();

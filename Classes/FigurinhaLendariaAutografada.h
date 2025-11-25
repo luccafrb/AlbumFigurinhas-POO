@@ -3,13 +3,13 @@
 
 #include "FigurinhaEspecial.h"
 
-class FigurinhaLendariaAutografada
+class FigurinhaLendariaAutografada : FigurinhaEspecial
 {
 private:
     string autografo;
 
 public:
-    FigurinhaLendariaAutografada(/* args */);
+    FigurinhaLendariaAutografada(int num, string nome, string cont, int status, string tipo, string autografo);
     ~FigurinhaLendariaAutografada();
 
     void mostrarDetalhes();

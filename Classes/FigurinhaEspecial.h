@@ -9,7 +9,7 @@ private:
     string tipo;
 
 public:
-    FigurinhaEspecial(/* args */);
+    FigurinhaEspecial(int num, string nome, string cont, int status, string tipo);
     ~FigurinhaEspecial();
 
     void mostrarDetalhes();

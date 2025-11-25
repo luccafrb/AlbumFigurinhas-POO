@@ -10,7 +10,7 @@ private:
     int capacidade;
 
 public:
-    FigurinhaEstadio(/* args */);
+    FigurinhaEstadio(int num, string nome, string cont, int status, string tipo, string cidade, int capacidade);
     ~FigurinhaEstadio();
 
     void mostrarDetalhes();
