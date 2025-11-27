@@ -47,7 +47,6 @@ void Figurinha::indisponibilizarParaTroca()
     status = 0;
 }
 
-// A assinatura agora usa Figurinha* para suportar polimorfismo
 vector<Figurinha *> Figurinha::CarregarDeCsv(const string &arquivo)
 {
     // A coleção agora armazena ponteiros, permitindo polimorfismo e herança.

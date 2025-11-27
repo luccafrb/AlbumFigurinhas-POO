@@ -11,7 +11,7 @@ private:
 
 public:
     FigurinhaEvolucao(int num, string nome, string cont, int status, string estagio, string proximoPokemon);
-    ~FigurinhaEvolucao();
+    virtual ~FigurinhaEvolucao();
 
     void mostrarDetalhes();
     Figurinha *clone();
