@@ -24,11 +24,9 @@ public:
     bool mostrarFigurinhasDisponiveisParaTroca();
     void abrirPacotinho(vector<Figurinha *> todasFigurinhas);
 
-    // Métodos para gerenciamento de requisições de troca
     void adicionarRequisicao(Troca &requisicao);
     vector<Troca> &getRequisicoes();
 
-    void adicionarFigurinha(Figurinha *figurinha);
     void removerFigurinha(Figurinha *figurinha);
 
     Figurinha *obterFigurinhaPeloNumParaTroca(int num);

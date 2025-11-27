@@ -83,8 +83,10 @@ void Usuario::proporTroca(vector<Usuario *> &listaUsuarios)
         bool usuarioValido = false;
 
         if (escolha == "sair")
+        {
             cout << "Saindo do menu de trocas...\n";
-        return;
+            return;
+        }
 
         for (Usuario *u : listaUsuarios)
         {

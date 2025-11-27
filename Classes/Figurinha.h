@@ -48,7 +48,6 @@ public:
     void indisponibilizarParaTroca();
 
     virtual void mostrarDetalhes() = 0;
-    virtual int getValorTroca();
     virtual Figurinha *clone() = 0;
 
     // vetor de figurinhas

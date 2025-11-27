@@ -73,6 +73,12 @@ void program::inicializate()
     todasFigurinhas = Figurinha::CarregarDeCsv("Dados\\figurinhas.csv");
     // Carrega os usuários existentes
     usuarios = Usuario::CarregarDeCsv("Dados\\usuarios.csv", todasFigurinhas);
+
+    cout << "Figurinhas carregadas:" << endl;
+    for (Figurinha *f : todasFigurinhas)
+    {
+        cout << f->getNome() << endl;
+    }
 }
 
 /**

@@ -318,11 +318,6 @@ vector<Troca> &Album::getRequisicoes()
     return requisicoesTroca; // Retorna o vetor de requisições
 }
 
-void Album::adicionarFigurinha(Figurinha *figurinha)
-{
-    figurinhas.push_back(figurinha);
-}
-
 void Album::removerFigurinha(Figurinha *figurinha)
 {
     auto var = figurinhas.begin();

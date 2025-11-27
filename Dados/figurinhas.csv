@@ -41,6 +41,7 @@ num,nome,conteudo,TIPO,dado_1,dado_2,dado_3,dado_4
 40,Sableye,Fantasma,POKEMON,30,Fantasma,,
 41,Onix,Pedra/Terra,LOCAL,Johto,Jasmine,,
 42,Geodude,Pedra/Terra,POKEMON,10,Pedra,,
+43,Litobre,Pedra/Terra,POKEMON,90,Pedra,,
 44,Rhyhorn,Pedra/Terra,POKEMON,25,Pedra,,
 45,Donphan,Pedra/Terra,POKEMON,45,Pedra,,
 46,Dratini,Dragão,EVOLUCAO,1,Dragonair,,
