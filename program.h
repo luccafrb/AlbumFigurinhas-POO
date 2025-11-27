@@ -1,14 +1,20 @@
 #pragma once
 
-#include "Classes/Figurinha.h"
+#include "Classes/Figurinha.h" // Garante que a definição de Figurinha está disponível
 #include "Classes/Usuario.h"
 #include "Interface/Menus.h"
+#include <vector> // Incluir vector, caso não esteja nos includes anteriores
+
+using namespace std;
 
 class program
 {
 private:
     vector<Usuario> usuarios;
-    vector<Figurinha> todasFigurinhas;
+
+    // MUDANÇA ESSENCIAL: O vetor agora armazena PONTEIROS para Figurinha
+    // Isso é necessário para alocação dinâmica e polimorfismo (Requisito 8)
+    vector<Figurinha *> todasFigurinhas;
 
 public:
     program();
@@ -22,5 +28,5 @@ public:
     void menuGerenciarColecao(Usuario &usuarioAtual, Menus &menus);
     void menuInicial();
     Usuario &login();
-    void gerenciarRequisicoes(Usuario &usuarioAtual, vector<Usuario*> listaUsuarios);
+    void gerenciarRequisicoes(Usuario &usuarioAtual, vector<Usuario *> listaUsuarios);
 };

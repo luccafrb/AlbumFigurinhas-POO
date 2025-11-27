@@ -1,7 +1,7 @@
 #include "FigurinhaPokemon.h"
 
-FigurinhaPokemon::FigurinhaPokemon(int num, string nome, string cont, int status, int nivel)
-    : Figurinha(num, nome, cont, status), nivel(nivel) {}
+FigurinhaPokemon::FigurinhaPokemon(int num, string nome, string cont, int status, int nivel, string tipoPrincipal)
+    : Figurinha(num, nome, cont, status), nivel(nivel), tipoPrincipal(tipoPrincipal) {}
 
 FigurinhaPokemon::~FigurinhaPokemon()
 {

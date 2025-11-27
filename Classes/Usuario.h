@@ -10,14 +10,14 @@ private:
     Album album;
 
 public:
-    Usuario(string nome, string senha, vector<Figurinha> &todasFigurinhas);
+    Usuario(string nome, string senha, vector<Figurinha *> &todasFigurinhas);
     ~Usuario();
 
     string getNome() const;
     string getSenha() const;
 
     static vector<Usuario> CarregarDeCsv(const string &arquivo, vector<Figurinha> &todasFigurinhas);
-    void proporTroca(vector<Usuario*> &listaUsuarios);
+    void proporTroca(vector<Usuario *> &listaUsuarios);
     void salvarEmCsv(const string &arquivo);
-    Album& getAlbum();
+    Album &getAlbum();
 };

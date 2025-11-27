@@ -44,7 +44,7 @@ bool Album::colarFigurinha()
                     cout << "Não é possível colar uma figurinha disponível para troca." << endl;
                     break;
                 }
-                
+
                 f.colar();
 
                 for (Pagina &p : paginas)
@@ -66,19 +66,18 @@ bool Album::colarFigurinha()
         {
             return false;
         }
-        
     }
 
     return true;
 }
 
-void Album::adicionarFigurinha(Figurinha figurinha)
+void Album::adicionarFigurinha(Figurinha *figurinha)
 {
-    figurinha.indisponibilizarParaTroca();
+    figurinha->indisponibilizarParaTroca();
     figurinhas.push_back(figurinha);
 }
 
-void Album::verAlbum() 
+void Album::verAlbum()
 {
     if (paginas.empty())
     {
@@ -137,7 +136,7 @@ bool Album::mostrarFigurinhasDaColecao()
             }
         }
     }
-    
+
     bool temFigurinha2 = false;
 
     for (Figurinha &f : figurinhas)
@@ -159,14 +158,13 @@ bool Album::mostrarFigurinhasDaColecao()
             }
         }
     }
-    
 
     if (!temFigurinha1 && !temFigurinha2)
     {
         cout << "Nenhuma figurinha na coleção" << endl;
         return false;
     }
-    
+
     return true;
 }
 
@@ -209,12 +207,11 @@ void Album::criarPaginas(vector<Figurinha> &todasFigurinhas)
         Pagina novaPagina(conteudo, numMin, numMax);
         paginas.push_back(novaPagina);
     }
-
 }
 
 bool Album::disponibilizarFigurinhaParaTroca()
 {
-    if(mostrarFigurinhasDaColecao() == false)
+    if (mostrarFigurinhasDaColecao() == false)
     {
         return false;
     }
@@ -253,7 +250,6 @@ bool Album::mostrarFigurinhasDisponiveisParaTroca()
         {
             temDisponivel = true;
         }
-        
     }
 
     if (temDisponivel)
@@ -268,7 +264,7 @@ bool Album::mostrarFigurinhasDisponiveisParaTroca()
             }
         }
     }
-    
+
     if (!temDisponivel)
     {
         cout << "Nenhuma figurinha na coleção" << endl;
@@ -316,9 +312,9 @@ void Album::adicionarRequisicao(Troca &requisicao)
     requisicoesTroca.push_back(requisicao);
 }
 
-vector<Troca>& Album::getRequisicoes()
+vector<Troca> &Album::getRequisicoes()
 {
-    return requisicoesTroca;  // Retorna o vetor de requisições
+    return requisicoesTroca; // Retorna o vetor de requisições
 }
 
 void Album::adicionarFigurinha(Figurinha *figurinha)
@@ -338,7 +334,7 @@ void Album::removerFigurinha(Figurinha *figurinha)
     }
 }
 
-Figurinha* Album::obterFigurinhaPeloNumParaTroca(int num)
+Figurinha *Album::obterFigurinhaPeloNumParaTroca(int num)
 {
     for (Figurinha &f : figurinhas)
     {

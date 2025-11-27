@@ -11,10 +11,17 @@ using namespace std;
 
 int main()
 {
-
-    program p;
-    p.inicializate();
-    p.run();
+    try
+    {
+        program p;
+        p.inicializate();
+        p.run();
+    }
+    catch (const exception &e)
+    {
+        cerr << "Erro: " << e.what() << endl;
+        return 1;
+    }
 
     return 0;
 }

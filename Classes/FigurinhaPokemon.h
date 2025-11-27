@@ -10,7 +10,7 @@ private:
     int nivel;
 
 public:
-    FigurinhaPokemon(int num, string nome, string cont, int status, int nivel);
+    FigurinhaPokemon(int num, string nome, string cont, int status, int nivel, string tipoPrincipal);
     ~FigurinhaPokemon();
 
     void mostrarDetalhes();

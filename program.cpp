@@ -1,10 +1,15 @@
 #include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm> // Inclua se necessário
 #include "program.h"
 #include "Interface/Menus.h"
 #include "Classes/Usuario.h"
+// Assumindo que Figurinha e Troca estão incluídas via Usuario ou em outro lugar
 
 using namespace std;
 
+// Implementação do Construtor e Destrutor
 program::program()
 {
 }
@@ -13,11 +18,16 @@ program::~program()
 {
 }
 
+// Implementação dos Métodos
+
+/**
+ * @brief Adiciona um novo usuário ao sistema, garantindo que o nome de usuário seja único.
+ */
 void program::adicionarUsuario()
 {
     bool nomeUnico = false;
-
     string nome, senha;
+
     while (!nomeUnico)
     {
         cout << "Digite o nome do novo usuário: ";
@@ -32,35 +42,47 @@ void program::adicionarUsuario()
                 cout << "O nome de usuário \"" << u.getNome() << "\" já existe. Escolha outro, por favor." << endl;
                 nomeUnico = false;
                 break;
-            };
+            }
         }
     }
 
     cout << "Digite a senha do novo usuário: ";
     cin >> senha;
 
+    // Assumindo que o construtor de Usuario recebe (nome, senha, todasFigurinhas)
     Usuario novoUsuario(nome, senha, todasFigurinhas);
 
+    // Salva o novo usuário em CSV e o adiciona à lista em memória
     novoUsuario.salvarEmCsv("Dados\\usuarios.csv");
     usuarios.push_back(novoUsuario);
 }
 
+/**
+ * @brief Carrega as figurinhas e os usuários a partir de arquivos CSV.
+ */
 void program::inicializate()
 {
     cout << "Bem vindo ao Álbum de figurinhas!" << endl;
 
+    // Carrega todas as figurinhas disponíveis
     todasFigurinhas = Figurinha::CarregarDeCsv("Dados\\figurinhas.csv");
+    // Carrega os usuários existentes
     usuarios = Usuario::CarregarDeCsv("Dados\\usuarios.csv", todasFigurinhas);
 }
 
+/**
+ * @brief Ponto de entrada principal da aplicação.
+ */
 void program::run()
 {
     menuInicial();
 }
 
+/**
+ * @brief Exibe o menu principal para gerenciar o álbum do usuário logado.
+ */
 void program::menuGerenciarAlbum(Usuario &usuarioAtual, Menus &menus)
 {
-
     int escolha = 0;
 
     while (true)
@@ -83,19 +105,21 @@ void program::menuGerenciarAlbum(Usuario &usuarioAtual, Menus &menus)
             break;
         case 4:
             return;
-            break;
         default:
             cout << "Opção inválida!" << endl;
         }
-    };
+    }
 }
 
+/**
+ * @brief Exibe o menu para gerenciar a coleção de figurinhas (trocas, colar, etc.).
+ */
 void program::menuGerenciarColecao(Usuario &usuarioAtual, Menus &menus)
 {
     int escolha = 0;
+    vector<Usuario *> listaUsuarios;
 
-    vector<Usuario*> listaUsuarios;
-
+    // Preenche lista de outros usuários para trocas
     for (Usuario &u : usuarios)
     {
         if (u.getNome() != usuarioAtual.getNome())
@@ -103,7 +127,6 @@ void program::menuGerenciarColecao(Usuario &usuarioAtual, Menus &menus)
             listaUsuarios.push_back(&u);
         }
     }
-    
 
     while (true)
     {
@@ -146,9 +169,12 @@ void program::menuGerenciarColecao(Usuario &usuarioAtual, Menus &menus)
         default:
             cout << "Opção inválida!" << endl;
         }
-    };
+    }
 }
 
+/**
+ * @brief Exibe o menu inicial (cadastro, login, sair).
+ */
 void program::menuInicial()
 {
     int escolha;
@@ -168,8 +194,7 @@ void program::menuInicial()
 
         case 2:
         {
-            Usuario& usuarioAtual = login();
-
+            Usuario &usuarioAtual = login();
             menuGerenciarAlbum(usuarioAtual, menus);
             break;
         }
@@ -180,8 +205,8 @@ void program::menuInicial()
 
         case 4:
         {
+            // Opção de debug/visualização
             cout << "Lista de usuários:" << endl;
-
             for (const Usuario &u : usuarios)
             {
                 cout << u.getNome() << endl;
@@ -189,10 +214,9 @@ void program::menuInicial()
 
             cout << endl;
             cout << "Lista de Figurinhas:" << endl;
-
-            for (Figurinha f : todasFigurinhas)
+            for (Figurinha *f : todasFigurinhas)
             {
-                cout << f.getNome() << endl;
+                cout << f->getNome() << endl;
             }
             break;
         }
@@ -203,6 +227,10 @@ void program::menuInicial()
     } while (escolha != 3);
 }
 
+/**
+ * @brief Realiza o processo de login do usuário.
+ * @return Referência para o objeto Usuario logado.
+ */
 Usuario &program::login()
 {
     string senha, nome;
@@ -212,7 +240,6 @@ Usuario &program::login()
         cout << "- " << u.getNome() << endl;
     }
 
-    bool loginValido = false;
     while (true)
     {
         cout << "Digite o nome do seu usuário: ";
@@ -243,14 +270,17 @@ Usuario &program::login()
     }
 }
 
-void program::gerenciarRequisicoes(Usuario &usuarioAtual, vector<Usuario*> listaUsuarios)
+/**
+ * @brief Permite ao usuário logado aceitar ou recusar requisições de troca.
+ */
+void program::gerenciarRequisicoes(Usuario &usuarioAtual, vector<Usuario *> listaUsuarios)
 {
-
+    // Assume que mostrarRequisicoes exibe a lista e retorna se há requisições pendentes
     if (!usuarioAtual.getAlbum().mostrarRequisicoes())
     {
         return;
     }
-    
+
     int opcao = -1;
     while (true)
     {
@@ -262,67 +292,73 @@ void program::gerenciarRequisicoes(Usuario &usuarioAtual, vector<Usuario*> lista
             return;
         }
 
-        vector<Troca>* trocas = &usuarioAtual.getAlbum().getRequisicoes();
-        Troca* trocaEscolhida = &usuarioAtual.getAlbum().getRequisicoes()[opcao - 1];
+        vector<Troca> *trocas = &usuarioAtual.getAlbum().getRequisicoes();
 
-        Usuario* usuarioProponente;
-        for (Usuario* u : listaUsuarios)
+        if (opcao < 1 || opcao > trocas->size())
+        {
+            cout << "Opção de requisição inválida. Tente novamente." << endl;
+            continue;
+        }
+
+        Troca *trocaEscolhida = &(*trocas)[opcao - 1];
+
+        // Encontra o ponteiro para o usuário proponente
+        Usuario *usuarioProponente = nullptr;
+        for (Usuario *u : listaUsuarios)
         {
             if (trocaEscolhida->getNomeProponente() == u->getNome())
             {
                 usuarioProponente = u;
-            }
-        }
-        
-
-        int decisao;
-
-        if (opcao <= trocas->size() && trocas->size() > 0)
-        {
-            trocaEscolhida->mostrar();
-
-            switch (trocaEscolhida->getStatus())
-            {
-            case 1:
-                cout << "Requisição já aceita!" << endl;
-                continue;
-            
-            case 2:
-                cout << "Requisição já recusada!" << endl;
-                continue;
-
-            default:
-                cout << "O que você deseja fazer com essa requisição? 1 - Aceitar / 2 - Recusar / 0 - voltar: ";
-                cin >> decisao;
-
-                if (decisao == 0)
-                {
-                    continue;
-                }
-                
                 break;
             }
         }
 
-        if(decisao == 1)
+        int decisao;
+
+        trocaEscolhida->mostrar();
+
+        switch (trocaEscolhida->getStatus())
+        {
+        case 1:
+            cout << "Requisição já aceita!" << endl;
+            continue;
+
+        case 2:
+            cout << "Requisição já recusada!" << endl;
+            continue;
+
+        default: // Status pendente (0)
+            cout << "O que você deseja fazer com essa requisição? 1 - Aceitar / 2 - Recusar / 0 - voltar: ";
+            cin >> decisao;
+
+            if (decisao == 0)
+            {
+                continue;
+            }
+
+            break;
+        }
+
+        if (decisao == 1)
         {
             trocaEscolhida->aceitar(true);
 
-            Figurinha* figOferecida = trocaEscolhida->getFigurinhaOferecida();
-            Figurinha* figRequerida = trocaEscolhida->getFigurinhaRequerida();
-            
+            Figurinha *figOferecida = trocaEscolhida->getFigurinhaOferecida();
+            Figurinha *figRequerida = trocaEscolhida->getFigurinhaRequerida();
+
+            // Troca de posse das figurinhas
             usuarioAtual.getAlbum().adicionarFigurinha(figOferecida);
-            usuarioAtual.getAlbum().removerFigurinha(figRequerida);
+            usuarioAtual.getAlbum().removerFigurinha(figRequerida); // Esta deve ser a figurinha que o proponente precisa (e o atual tem para troca)
 
             usuarioProponente->getAlbum().adicionarFigurinha(figRequerida);
-            usuarioProponente->getAlbum().removerFigurinha(figOferecida);
+            usuarioProponente->getAlbum().removerFigurinha(figOferecida); // Esta deve ser a figurinha que o proponente ofereceu
 
             cout << "Troca realizada!" << endl;
-        } 
-        else if(decisao == 2)
+        }
+        else if (decisao == 2)
         {
             trocaEscolhida->aceitar(false);
             cout << "Requisição recusada!" << endl;
         }
-    }       
+    }
 }

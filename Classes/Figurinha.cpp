@@ -98,22 +98,22 @@ vector<Figurinha *> Figurinha::CarregarDeCsv(const string &arquivo)
         }
         else if (tipoFigurinha == "LOCAL")
         {
-            // FigurinhaLocal(num, nome, cont, status, regiao, lider)
+            // FigurinhaLocal(num, nome, cont, status, tipo, regiao, lider)
             string regiao = dado1;
             string liderGinasio = dado2;
-            novaFigurinha = new FigurinhaLocal(num, nome, conteudo, statusInicial, regiao, liderGinasio);
+            novaFigurinha = new FigurinhaLocal(num, nome, conteudo, statusInicial, tipoFigurinha, regiao, liderGinasio);
         }
         else if (tipoFigurinha == "EVOLUCAO")
         {
             // FigurinhaEvolucao(num, nome, cont, status, estagio, proximoPokemon)
-            int estagio = stoi(dado1);
+            string estagio = dado1;
             string proximoPokemon = dado2;
             novaFigurinha = new FigurinhaEvolucao(num, nome, conteudo, statusInicial, estagio, proximoPokemon);
         }
         else if (tipoFigurinha == "MEGA")
         {
             // FigurinhaMegaEvolucao(num, nome, cont, status, estagio, proximoPokemon, pedraMega)
-            int estagio = stoi(dado1);
+            string estagio = dado1;
             string proximoPokemon = dado2;
             string pedraMega = dado3;
             novaFigurinha = new FigurinhaMegaEvolucao(num, nome, conteudo, statusInicial, estagio, proximoPokemon, pedraMega);
