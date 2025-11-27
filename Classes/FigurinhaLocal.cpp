@@ -10,3 +10,8 @@ FigurinhaLocal::~FigurinhaLocal()
 void FigurinhaLocal::mostrarDetalhes()
 {
 }
+
+Figurinha *FigurinhaLocal::clone()
+{
+    return new FigurinhaLocal(*this);
+}

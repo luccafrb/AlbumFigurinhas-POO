@@ -14,6 +14,7 @@ public:
     ~FigurinhaLocal();
 
     void mostrarDetalhes();
+    Figurinha *clone();
 };
 
 #endif

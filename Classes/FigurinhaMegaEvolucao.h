@@ -13,6 +13,7 @@ public:
     ~FigurinhaMegaEvolucao();
 
     void mostrarDetalhes();
+    Figurinha *clone();
 };
 
 #endif

@@ -12,3 +12,8 @@ FigurinhaMegaEvolucao::~FigurinhaMegaEvolucao()
 void FigurinhaMegaEvolucao::mostrarDetalhes()
 {
 }
+
+Figurinha *FigurinhaMegaEvolucao::clone()
+{
+    return new FigurinhaMegaEvolucao(*this);
+}

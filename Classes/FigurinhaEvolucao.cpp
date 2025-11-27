@@ -10,3 +10,8 @@ FigurinhaEvolucao::~FigurinhaEvolucao()
 void FigurinhaEvolucao::mostrarDetalhes()
 {
 }
+
+Figurinha *FigurinhaEvolucao::clone()
+{
+    return new FigurinhaEvolucao(*this);
+}

@@ -14,6 +14,7 @@ public:
     ~FigurinhaEvolucao();
 
     void mostrarDetalhes();
+    Figurinha *clone();
 };
 
 #endif

@@ -7,6 +7,11 @@ FigurinhaPokemon::~FigurinhaPokemon()
 {
 }
 
+Figurinha *FigurinhaPokemon::clone()
+{
+    return new FigurinhaPokemon(*this);
+}
+
 void FigurinhaPokemon::mostrarDetalhes()
 {
 }

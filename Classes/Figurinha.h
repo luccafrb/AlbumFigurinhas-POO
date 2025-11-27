@@ -49,6 +49,7 @@ public:
 
     virtual void mostrarDetalhes() = 0;
     virtual int getValorTroca();
+    virtual Figurinha *clone() = 0;
 
     // vetor de figurinhas
     static vector<Figurinha *> CarregarDeCsv(const string &arquivo);
