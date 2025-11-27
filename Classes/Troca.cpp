@@ -8,7 +8,8 @@ Troca::Troca(string proponente, Figurinha &requerida, Figurinha &oferecida)
     : nomeProponente(proponente), figurinhaRequerida(requerida), figurinhaOferecida(oferecida), status(0) {}
 
 Troca::~Troca()
-{}
+{
+}
 
 string Troca::getNomeProponente()
 {
@@ -36,34 +37,34 @@ void Troca::aceitar(bool decisao)
     {
         status = 1;
     }
-    else if(!decisao)
+    else if (!decisao)
     {
         status = 2;
-    }   
+    }
 }
 
 void Troca::mostrar()
 {
     cout << "Requisicao de " << nomeProponente << ":" << endl;
 
-        cout << "Figurinha requerida: " << figurinhaRequerida.getNome() << endl;
-        cout << "Figurinha oferecida: " << figurinhaOferecida.getNome() << endl;
-        cout << "Status: ";
+    cout << "Figurinha requerida: " << figurinhaRequerida.getNome() << endl;
+    cout << "Figurinha oferecida: " << figurinhaOferecida.getNome() << endl;
+    cout << "Status: ";
 
-        string statusStr;
-        switch (status)
-        {
-        case 0:
-            statusStr = "Aguardando análise";
-            break;
-        
-        case 1:
-            statusStr = "Aceita";
-            break;
-        case 2:
-            statusStr = "Recusada";
-            break;
-        }
+    string statusStr;
+    switch (status)
+    {
+    case 0:
+        statusStr = "Aguardando análise";
+        break;
 
-        cout << status << endl;
+    case 1:
+        statusStr = "Aceita";
+        break;
+    case 2:
+        statusStr = "Recusada";
+        break;
+    }
+
+    cout << status << endl;
 };

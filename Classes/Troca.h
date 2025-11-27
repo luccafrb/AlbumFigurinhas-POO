@@ -9,7 +9,8 @@ class Troca
 {
 private:
     string nomeProponente;
-    Figurinha figurinhaRequerida, figurinhaOferecida;
+    Figurinha &figurinhaRequerida;
+    Figurinha &figurinhaOferecida;
     int status;
 
 public:
