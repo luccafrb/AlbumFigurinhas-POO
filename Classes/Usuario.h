@@ -16,7 +16,7 @@ public:
     string getNome() const;
     string getSenha() const;
 
-    static vector<Usuario> CarregarDeCsv(const string &arquivo, vector<Figurinha> &todasFigurinhas);
+    static vector<Usuario> CarregarDeCsv(const string &arquivo, vector<Figurinha *> &todasFigurinhas);
     void proporTroca(vector<Usuario *> &listaUsuarios);
     void salvarEmCsv(const string &arquivo);
     Album &getAlbum();

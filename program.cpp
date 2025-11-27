@@ -16,6 +16,11 @@ program::program()
 
 program::~program()
 {
+    for (Figurinha *f : todasFigurinhas)
+    {
+        delete f;
+    }
+    todasFigurinhas.clear();
 }
 
 // Implementação dos Métodos
