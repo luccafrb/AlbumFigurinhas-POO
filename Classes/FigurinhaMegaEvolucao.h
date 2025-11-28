@@ -12,8 +12,8 @@ public:
     FigurinhaMegaEvolucao(int num, string nome, string cont, int status, string estagio, string proximoPokemon, string pedraMega);
     ~FigurinhaMegaEvolucao();
 
-    void mostrarDetalhes();
-    Figurinha *clone();
+    void mostrarDetalhes() override;
+    Figurinha *clone() override;
 };
 
 #endif

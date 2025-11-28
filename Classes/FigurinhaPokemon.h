@@ -12,9 +12,9 @@ private:
 public:
     FigurinhaPokemon(int num, string nome, string cont, int status, int nivel, string tipoPrincipal);
     ~FigurinhaPokemon();
-    Figurinha *clone();
+    Figurinha *clone() override;
 
-    void mostrarDetalhes();
+    void mostrarDetalhes() override;
 };
 
 #endif

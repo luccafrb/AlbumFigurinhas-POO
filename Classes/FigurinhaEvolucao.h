@@ -13,8 +13,8 @@ public:
     FigurinhaEvolucao(int num, string nome, string cont, int status, string estagio, string proximoPokemon);
     virtual ~FigurinhaEvolucao();
 
-    void mostrarDetalhes();
-    Figurinha *clone();
+    void mostrarDetalhes() override;
+    Figurinha *clone() override;
 };
 
 #endif

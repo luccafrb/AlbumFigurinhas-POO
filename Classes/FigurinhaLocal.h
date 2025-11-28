@@ -13,8 +13,8 @@ public:
     FigurinhaLocal(int num, string nome, string cont, int status, string tipo, string regiao, string liderGinasio);
     ~FigurinhaLocal();
 
-    void mostrarDetalhes();
-    Figurinha *clone();
+    void mostrarDetalhes() override;
+    Figurinha *clone() override;
 };
 
 #endif
