@@ -15,33 +15,60 @@ Album::~Album()
 {
 }
 
-bool Album::colarFigurinha()
+bool Album::colarFigurinhas(const string &entrada)
 {
-    int escolha = -1;
-
-    while (true)
+    if (figurinhas.empty() || mostrarFigurinhasDaColecao() == false)
     {
-        if (mostrarFigurinhasDaColecao() == false)
+        cout << "Sem figurinhas na coleção." << endl;
+        return false;
+    }
+
+    if (entrada.empty())
+    {
+        cout << "Nenhum número digitado." << endl;
+        return false;
+    }
+
+    // Separar a string por vírgula
+    vector<int> numeros;
+    string temp;
+    for (char c : entrada)
+    {
+        if (isdigit((unsigned char)c))
+            temp += c;
+        else if (c == ',' || c == ' ')
         {
-            cout << "Sem figurinhas na coleção." << endl;
-            return false;
+            if (!temp.empty())
+            {
+                numeros.push_back(stoi(temp));
+                temp.clear();
+            }
         }
+    }
+    if (!temp.empty())
+        numeros.push_back(stoi(temp));
 
-        cout << "Digite o número da figurinha que você deseja colar (0 para sair): ";
-        cin >> escolha;
+    if (numeros.empty())
+    {
+        cout << "Nenhum número válido encontrado na entrada." << endl;
+        return false;
+    }
 
-        if (escolha == 0)
-            break;
+    bool colouAlguma = false;
 
-        bool figurinhaValida = false;
+    for (int num : numeros)
+    {
+        bool encontrado = false;
 
         for (Figurinha *f : figurinhas)
         {
-            if (f->getNum() == escolha)
+            if (f->getNum() == num)
             {
+                encontrado = true;
+
                 if (f->getStatus() == 2)
                 {
-                    cout << "Não é possível colar uma figurinha disponível para troca." << endl;
+                    cout << "Figurinha " << num << " está disponível para troca. Não pode colar." << endl;
                     break;
                 }
 
@@ -52,23 +79,23 @@ bool Album::colarFigurinha()
                     if (p.getTitulo() == f->getConteudo())
                     {
                         p.adicionarFigurinha(f);
-                        cout << "Colada na página " << p.getTitulo() << endl;
+                        cout << "Figurinha " << num << " colada na página " << p.getTitulo() << endl;
                         break;
                     }
                 }
 
-                figurinhaValida = true;
+                colouAlguma = true;
                 break;
             }
         }
 
-        if (!figurinhaValida)
+        if (!encontrado)
         {
-            return false;
+            cout << "Figurinha " << num << " não encontrada na coleção." << endl;
         }
     }
 
-    return true;
+    return colouAlguma;
 }
 
 void Album::adicionarFigurinha(Figurinha *figurinha)
