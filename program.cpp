@@ -158,10 +158,19 @@ void program::menuGerenciarColecao(Usuario &usuarioAtual, Menus &menus)
             getchar();
             break;
         case 3:
-            usuarioAtual.getAlbum().colarFigurinha();
-            cout << "Precione qualquer tela para continuar";
+        {
+            usuarioAtual.getAlbum().mostrarFigurinhasDaColecao(); 
+            cout << "Digite os números das figurinhas que deseja colar (ex: 12,23,31): ";
+            cin.ignore();
+            string entrada;
+            getline(cin, entrada);
+        
+            usuarioAtual.getAlbum().colarFigurinhas(entrada);
+        
+            cout << "Pressione ENTER para continuar";
             getchar();
-            getchar();
+            break;
+        }
             break;
         case 4:
             usuarioAtual.getAlbum().disponibilizarFigurinhaParaTroca();
