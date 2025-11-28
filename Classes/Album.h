@@ -15,7 +15,7 @@ public:
     Album(vector<Figurinha *> todasFigurinhas);
     ~Album();
 
-    bool colarFigurinha();
+    bool colarFigurinhas(const string &entrada);    
     bool mostrarFigurinhasDaColecao();
     void adicionarFigurinha(Figurinha *figurinha);
     void verAlbum();
